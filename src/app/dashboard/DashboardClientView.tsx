@@ -9,6 +9,7 @@ import { Modal } from "@/components/shared/Modal";
 import { signOutAction } from "@/lib/auth/actions";
 import { dictionaries } from "@/lib/i18n/dictionary";
 import type { CapabilityBaselineProfile } from "@/types/assessment";
+import type { GrowthJourneyData } from "@/types/journey";
 
 interface DashboardClientViewProps {
   displayName: string;
@@ -19,6 +20,7 @@ interface DashboardClientViewProps {
   capabilities: readonly { id: string; title: string; description: string; color: string }[];
   appName: string;
   capabilityProfiles?: CapabilityBaselineProfile[];
+  activeJourney?: GrowthJourneyData | null;
 }
 
 const JOURNEY_STAGES = [
@@ -39,6 +41,7 @@ export function DashboardClientView({
   isSupabaseConfigured,
   capabilities,
   capabilityProfiles = [],
+  activeJourney = null,
 }: DashboardClientViewProps) {
   const [activeTab, setActiveTab] = useState<"overview" | "journey" | "profile" | "portfolio">("overview");
   const [isAssessmentModalOpen, setIsAssessmentModalOpen] = useState(false);
@@ -53,6 +56,30 @@ export function DashboardClientView({
 
   const completedCount = capabilityProfiles.length;
   const allCompleted = completedCount >= capabilities.length;
+
+  // Extract next activity and upcoming milestone from active journey
+  let nextActivity: { title: string; estimatedMinutes: number; purpose: string } | null = null;
+  let upcomingMilestone: { title: string; period: string } | null = null;
+  if (activeJourney) {
+    for (const fa of activeJourney.focusAreas) {
+      for (const goal of fa.goals) {
+        for (const ms of goal.milestones) {
+          if (!upcomingMilestone && ms.status !== "completed") {
+            upcomingMilestone = { title: ms.title, period: ms.suggestedPeriod };
+          }
+          for (const act of ms.activities) {
+            if (!nextActivity && act.status !== "completed") {
+              nextActivity = {
+                title: act.title,
+                estimatedMinutes: act.estimatedMinutes,
+                purpose: act.purpose,
+              };
+            }
+          }
+        }
+      }
+    }
+  }
 
   return (
     <div className="flex-1 flex flex-col min-h-screen bg-zinc-50/50 dark:bg-zinc-950/50">
@@ -167,29 +194,77 @@ export function DashboardClientView({
               </div>
 
               {/* Next Step CTA Card */}
-              <div className="bg-gradient-to-br from-indigo-50 to-violet-50/50 dark:from-indigo-950/30 dark:to-violet-950/20 border border-indigo-200 dark:border-indigo-800/80 rounded-xl p-5 md:max-w-md w-full space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">
-                    {allCompleted ? "Baseline Established" : "Primary Next Step"}
-                  </span>
-                  <span className="text-xs font-mono text-zinc-400">Stage 01: Assess</span>
+              {activeJourney ? (
+                <div className="bg-gradient-to-br from-emerald-50 to-teal-50/50 dark:from-emerald-950/30 dark:to-teal-950/20 border border-emerald-300 dark:border-emerald-800 rounded-xl p-5 md:max-w-md w-full space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-bold text-emerald-800 dark:text-emerald-400 uppercase tracking-wider">
+                      Active Growth Journey
+                    </span>
+                    <span className="text-xs font-mono text-zinc-400">Stage 02: Explore & Guide</span>
+                  </div>
+                  <h3 className="text-base font-bold text-zinc-900 dark:text-zinc-100">
+                    {activeJourney.title}
+                  </h3>
+                  <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed line-clamp-2">
+                    {activeJourney.description}
+                  </p>
+                  {nextActivity && (
+                    <div className="p-2.5 rounded-lg bg-white/90 dark:bg-zinc-900/90 border border-emerald-200 dark:border-emerald-900/60 text-xs">
+                      <span className="font-semibold text-emerald-900 dark:text-emerald-300">
+                        Next Up:{" "}
+                      </span>
+                      <span className="text-zinc-700 dark:text-zinc-300">
+                        {nextActivity.title} (⏱ {nextActivity.estimatedMinutes}m)
+                      </span>
+                    </div>
+                  )}
+                  <Link href={`/journey/${activeJourney.id}`} className="block w-full">
+                    <Button variant="primary" size="sm" className="w-full bg-emerald-800 hover:bg-emerald-900 text-white">
+                      Continue Growth Journey →
+                    </Button>
+                  </Link>
                 </div>
-                <h3 className="text-base font-bold text-zinc-900 dark:text-zinc-100">
-                  {allCompleted
-                    ? "Capability Assessment Complete"
-                    : t.assessmentPromptTitle}
-                </h3>
-                <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                  {allCompleted
-                    ? "Your baseline scores across all three capabilities have been recorded. You can review detailed results anytime."
-                    : t.assessmentPromptDesc}
-                </p>
-                <Link href="/assessment" className="block w-full">
-                  <Button variant="primary" size="sm" className="w-full">
-                    {allCompleted ? "View Assessment Baselines →" : `${t.assessmentCta} →`}
-                  </Button>
-                </Link>
-              </div>
+              ) : completedCount > 0 ? (
+                <div className="bg-gradient-to-br from-indigo-50 to-violet-50/50 dark:from-indigo-950/30 dark:to-violet-950/20 border border-indigo-200 dark:border-indigo-800/80 rounded-xl p-5 md:max-w-md w-full space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">
+                      Baseline Established
+                    </span>
+                    <span className="text-xs font-mono text-zinc-400">Ready for Personalization</span>
+                  </div>
+                  <h3 className="text-base font-bold text-zinc-900 dark:text-zinc-100">
+                    Design Your Personalized Growth Journey
+                  </h3>
+                  <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                    Convert your assessment evidence into structured, progressive milestones and targeted activities.
+                  </p>
+                  <Link href="/journey/create" className="block w-full">
+                    <Button variant="primary" size="sm" className="w-full">
+                      Design Growth Journey →
+                    </Button>
+                  </Link>
+                </div>
+              ) : (
+                <div className="bg-gradient-to-br from-indigo-50 to-violet-50/50 dark:from-indigo-950/30 dark:to-violet-950/20 border border-indigo-200 dark:border-indigo-800/80 rounded-xl p-5 md:max-w-md w-full space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">
+                      Primary Next Step
+                    </span>
+                    <span className="text-xs font-mono text-zinc-400">Stage 01: Assess</span>
+                  </div>
+                  <h3 className="text-base font-bold text-zinc-900 dark:text-zinc-100">
+                    {t.assessmentPromptTitle}
+                  </h3>
+                  <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                    {t.assessmentPromptDesc}
+                  </p>
+                  <Link href="/assessment" className="block w-full">
+                    <Button variant="primary" size="sm" className="w-full">
+                      {`${t.assessmentCta} →`}
+                    </Button>
+                  </Link>
+                </div>
+              )}
             </div>
 
             {/* Target Capabilities Section */}
@@ -343,21 +418,109 @@ export function DashboardClientView({
           </div>
         )}
 
-        {/* Tab 2: My Journey (Coming Soon State) */}
+        {/* Tab 2: My Journey */}
         {activeTab === "journey" && (
-          <div className="text-center py-16 space-y-4 rounded-2xl border border-dashed border-zinc-300 dark:border-zinc-800 bg-white dark:bg-zinc-900/40 p-8 animate-in fade-in duration-150">
-            <span className="text-4xl">🗺️</span>
-            <h3 className="text-xl font-bold text-zinc-900 dark:text-zinc-100">
-              Personalized Journey Roadmaps
-            </h3>
-            <p className="text-sm text-zinc-500 dark:text-zinc-400 max-w-md mx-auto">
-              Your personalized multi-stage journey roadmap will unlock dynamically in Phase 4 using your baseline assessment data.
-            </p>
-            <Link href="/assessment">
-              <Button variant="primary" size="sm">
-                Open Assessment Hub
-              </Button>
-            </Link>
+          <div className="space-y-6 animate-in fade-in duration-150">
+            {activeJourney ? (
+              <div className="space-y-6">
+                <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 p-6 sm:p-8 space-y-6">
+                  <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 border-b border-zinc-100 dark:border-zinc-800 pb-5">
+                    <div className="space-y-1.5">
+                      <div className="flex items-center space-x-2">
+                        <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300">
+                          {activeJourney.status} Journey
+                        </span>
+                        <span className="text-xs text-zinc-400 font-mono">
+                          {activeJourney.targetDuration} • {activeJourney.weeklyCommitmentHours}
+                        </span>
+                      </div>
+                      <h3 className="text-2xl font-serif font-bold text-zinc-900 dark:text-zinc-50">
+                        {activeJourney.title}
+                      </h3>
+                      <p className="text-sm text-zinc-600 dark:text-zinc-400 max-w-2xl">
+                        {activeJourney.description}
+                      </p>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <Link
+                        href={`/journey/${activeJourney.id}`}
+                        className="px-4 py-2 rounded-xl bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 text-xs font-semibold hover:bg-zinc-800 transition"
+                      >
+                        Open Complete Journey →
+                      </Link>
+                    </div>
+                  </div>
+
+                  {/* Focus Areas Badges */}
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    {activeJourney.focusAreas.map((fa) => (
+                      <div
+                        key={fa.id}
+                        className="p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-800/40 space-y-2"
+                      >
+                        <span className="text-xs font-bold text-emerald-700 dark:text-emerald-400 uppercase">
+                          {fa.capabilityName}
+                        </span>
+                        <p className="text-xs text-zinc-600 dark:text-zinc-400 line-clamp-2">
+                          {fa.rationale}
+                        </p>
+                        <div className="text-[11px] text-zinc-400 pt-1 font-mono">
+                          {fa.goals.length} Goals Planned
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Highlights */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                    {nextActivity && (
+                      <div className="p-4 rounded-xl border border-emerald-200 dark:border-emerald-800/60 bg-emerald-50/50 dark:bg-emerald-950/20 space-y-2">
+                        <span className="text-xs font-bold uppercase text-emerald-800 dark:text-emerald-400">
+                          Next Planned Activity
+                        </span>
+                        <h4 className="font-semibold text-zinc-900 dark:text-zinc-100 text-sm">
+                          {nextActivity.title}
+                        </h4>
+                        <p className="text-xs text-zinc-600 dark:text-zinc-400">
+                          {nextActivity.purpose}
+                        </p>
+                        <div className="text-xs text-emerald-800 dark:text-emerald-300 font-mono">
+                          ⏱ {nextActivity.estimatedMinutes} minutes
+                        </div>
+                      </div>
+                    )}
+                    {upcomingMilestone && (
+                      <div className="p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-800/40 space-y-2">
+                        <span className="text-xs font-bold uppercase text-zinc-500">
+                          Upcoming Milestone
+                        </span>
+                        <h4 className="font-semibold text-zinc-900 dark:text-zinc-100 text-sm">
+                          {upcomingMilestone.title}
+                        </h4>
+                        <div className="text-xs text-zinc-500 font-mono">
+                          {upcomingMilestone.period}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="text-center py-16 space-y-4 rounded-2xl border border-dashed border-zinc-300 dark:border-zinc-800 bg-white dark:bg-zinc-900/40 p-8">
+                <span className="text-4xl">🌱</span>
+                <h3 className="text-xl font-bold text-zinc-900 dark:text-zinc-100">
+                  Ready to Shape Your Growth Journey
+                </h3>
+                <p className="text-sm text-zinc-500 dark:text-zinc-400 max-w-md mx-auto">
+                  Transform your assessment evidence and stated interests into a structured development plan with clear milestones.
+                </p>
+                <Link href="/journey/create">
+                  <Button variant="primary" size="sm">
+                    Design Personalized Journey →
+                  </Button>
+                </Link>
+              </div>
+            )}
           </div>
         )}
 

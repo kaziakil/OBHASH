@@ -1,10 +1,10 @@
 # OBHASH — Human-Centered Intelligence Platform
 
-**Phase:** Phase 3 of 8 (Capability Assessment Engine)  
+**Phase:** Phase 4 of 8 (Personalized Growth Journey)  
 **Team:** PastForward  
 **Philosophy:** Human-Centered Intelligence  
 **Target Audience:** Ages 18–30  
-**Status:** Phase 3 Complete — Ready for Review  
+**Status:** Phase 4 Complete — Ready for Review  
 
 ---
 
@@ -32,6 +32,7 @@ The platform focuses on three foundational human capabilities:
 | **Database** | Supabase (PostgreSQL) | Latest | Relational database with Row Level Security (RLS) |
 | **Authentication** | Supabase Auth (`@supabase/ssr`) | Latest | Secure cookie-based SSR session management |
 | **AI Integration** | Server-side LLM Layer | Modular | Provider-agnostic adapter (Google Gemini / OpenAI compatible) |
+| **Personalization Engine** | Hybrid Rule & AI Generator | Dual-engine | AI contextualization with deterministic pedagogical fallback |
 | **Evaluation Engine** | Rubric-based Evaluator | Dual-engine | AI rubric evaluation with deterministic fallback engine |
 | **Validation** | Zod | 3.24.2 | Schema-driven environment, request, and AI output validation |
 | **Deployment** | Vercel-compatible | — | Edge-ready serverless/Node.js hosting |
@@ -65,6 +66,7 @@ Run the migrations in `supabase/migrations/` using Supabase CLI or the Supabase 
 - `20261120000000_initial_schema.sql` (Phase 1: Profiles, Capabilities, Audit Logs, RLS)
 - `20261120010000_phase2_profiles.sql` (Phase 2: Display name, Interests, Growth intentions, Trigger)
 - `20261120020000_phase3_assessments.sql` (Phase 3: Assessment modules, Dimensions, Items, Attempts, Responses, Evaluations, Baseline Profiles)
+- `20261120030000_phase4_growth_journeys.sql` (Phase 4: Growth journeys, Focus areas, Goals, Milestones, Activities, Generation records)
 
 ### 3.4 Run the Development Server
 ```bash
@@ -84,7 +86,7 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ### 4.2 Onboarding & User Experience
 - **User Onboarding**: [`/onboarding`](http://localhost:3000/onboarding) — 5-step conversational onboarding flow.
-- **User Dashboard**: [`/dashboard`](http://localhost:3000/dashboard) — Authenticated personal home, capability baseline preview, real-time assessment status, and direct assessment links.
+- **User Dashboard**: [`/dashboard`](http://localhost:3000/dashboard) — Authenticated personal home, active growth journey widget, capability baseline preview, real-time assessment status, and quick practice actions.
 - **User Settings**: [`/settings`](http://localhost:3000/settings) — Profile editing, interests, growth intentions, and sign out.
 
 ### 4.3 Phase 3: Capability Assessment Engine
@@ -95,7 +97,13 @@ Open [http://localhost:3000](http://localhost:3000).
   - Curiosity: [`/assessment/curiosity`](http://localhost:3000/assessment/curiosity)
 - **Results Dashboard**: [`/assessment/results/[attemptId]`](http://localhost:3000/assessment/results/demo) — Transparent 4-level rubric evaluation breakdown with dimension scores, evidence citations, primary strengths, and developmental opportunities.
 
-### 4.4 Diagnostic & API Routes
+### 4.4 Phase 4: Personalized Growth Journey
+- **Journey Hub**: [`/journey`](http://localhost:3000/journey) — Overview of current active journey, next planned activity, upcoming milestone, and historical journey archives.
+- **Design Journey**: [`/journey/create`](http://localhost:3000/journey/create) — Interactive journey creation flow integrating assessment baseline evidence, duration, weekly commitment, proposal review, and customization.
+- **Journey Details**: [`/journey/[journeyId]`](http://localhost:3000/journey/demo-journey-1) — Full hierarchical view of focus areas, goals, milestones, and planned activities with interactive status management.
+- **Goal Deep Dive**: [`/journey/[journeyId]/goals/[goalId]`](http://localhost:3000/journey/demo-journey-1/goals/goal-ct-1) — Transparent recommendation explanations, evidence citations, and milestone practice breakdown.
+
+### 4.5 Diagnostic & API Routes
 - **System Health**: [`/api/health`](http://localhost:3000/api/health) — Diagnostic status of services.
 - **AI Connectivity**: [`/api/ai/test`](http://localhost:3000/api/ai/test) — AI adapter test route.
 
@@ -115,6 +123,10 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## 6. Documentation Index
 
+- [Growth Journey Architecture](file:///Users/kazi/Projects/OBHASH/docs/GROWTH_JOURNEY_ARCHITECTURE.md)
+- [Growth Journey Framework](file:///Users/kazi/Projects/OBHASH/docs/GROWTH_JOURNEY_FRAMEWORK.md)
+- [Personalization Engine Specification](file:///Users/kazi/Projects/OBHASH/docs/PERSONALIZATION_ENGINE.md)
+- [Growth Journey Database Schema](file:///Users/kazi/Projects/OBHASH/docs/GROWTH_JOURNEY_DATABASE.md)
 - [Assessment Framework](file:///Users/kazi/Projects/OBHASH/docs/ASSESSMENT_FRAMEWORK.md)
 - [Assessment Rubrics Specification](file:///Users/kazi/Projects/OBHASH/docs/ASSESSMENT_RUBRICS.md)
 - [Assessment Content Bank](file:///Users/kazi/Projects/OBHASH/docs/ASSESSMENT_CONTENT.md)

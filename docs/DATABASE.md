@@ -137,3 +137,11 @@ CREATE TRIGGER on_auth_user_created
    - Created `assessment_evaluations` (rubric score records).
    - Created `capability_profiles` (aggregated capability baselines).
    - Enforced Row Level Security (RLS) on all assessment tables (`auth.uid() = user_id`).
+4. `20261120030000_phase4_growth_journeys.sql` (Phase 4):
+   - Created `growth_journeys` (user journey headers, durations, statuses).
+   - Created `journey_capability_focus_areas` (selected capabilities, rationales, outcomes).
+   - Created `development_goals` (prioritized capability targets and transparent reasons).
+   - Created `journey_milestones` (sequential stage checkpoints).
+   - Created `planned_activities` (bite-sized 15-30m practice exercises).
+   - Created `journey_generation_records` (LLM & deterministic engine audit logs).
+   - Enforced Row Level Security (RLS) on all growth journey entities.

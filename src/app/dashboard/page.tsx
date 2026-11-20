@@ -2,6 +2,7 @@ import React from "react";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { CORE_CAPABILITIES, APP_METADATA } from "@/config/constants";
 import { getUserCapabilityProfiles } from "@/lib/assessments/actions";
+import { getActiveGrowthJourney } from "@/lib/journeys/actions";
 import { DashboardClientView } from "./DashboardClientView";
 
 export default async function DashboardPage() {
@@ -25,8 +26,11 @@ export default async function DashboardPage() {
     }
   }
 
-  // Retrieve user's capability baselines
-  const capabilityProfiles = await getUserCapabilityProfiles();
+  // Retrieve user's capability baselines & active growth journey in parallel
+  const [capabilityProfiles, activeJourney] = await Promise.all([
+    getUserCapabilityProfiles(),
+    getActiveGrowthJourney(),
+  ]);
 
   // Fallback display values if unconfigured or profile loading
   const displayName =
@@ -48,6 +52,7 @@ export default async function DashboardPage() {
       capabilities={CORE_CAPABILITIES}
       appName={APP_METADATA.name}
       capabilityProfiles={capabilityProfiles}
+      activeJourney={activeJourney}
     />
   );
 }

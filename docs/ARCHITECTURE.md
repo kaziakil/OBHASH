@@ -1,6 +1,6 @@
 # OBHASH Architecture Guide
 
-**Phase:** 1 of 8  
+**Phase:** 4 of 8 (Personalized Growth Journey)  
 **Document Status:** Complete & Active
 
 ---
@@ -12,8 +12,9 @@ OBHASH is engineered as a full-stack, modular web application using Next.js 16 (
 The design emphasizes:
 - **Human-Centered Intelligence**: Strengthening human agency rather than automating cognitive effort away.
 - **Clean Boundaries**: Strict separation between presentation, application logic, persistence, and external AI services.
+- **Evidence-Informed Personalization**: Grounding developmental roadmaps in authentic assessment demonstration.
 - **Zero-Leak Security**: Secrets and privileged database capabilities are confined strictly to server-side runtimes.
-- **Phase-Ready Extensibility**: Foundations built in Phase 1 support seamless integration of upcoming modules (Assessments, AI Coach, Journeys, Reflection).
+- **Phase-Ready Extensibility**: Clean abstraction boundaries for upcoming phases (AI Growth Coach, Challenge Workspace, Portfolio).
 
 ---
 
