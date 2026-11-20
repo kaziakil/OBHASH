@@ -656,6 +656,150 @@ export interface Database {
         };
         Relationships: [];
       };
+      coaching_sessions: {
+        Row: {
+          id: string;
+          user_id: string;
+          title: string;
+          capability_key: string;
+          journey_id: string | null;
+          goal_id: string | null;
+          status: string;
+          current_hint_level: number;
+          instruction_version: string;
+          created_at: string;
+          updated_at: string;
+          last_message_at: string;
+          completed_at: string | null;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          title?: string;
+          capability_key: string;
+          journey_id?: string | null;
+          goal_id?: string | null;
+          status?: string;
+          current_hint_level?: number;
+          instruction_version?: string;
+          created_at?: string;
+          updated_at?: string;
+          last_message_at?: string;
+          completed_at?: string | null;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          title?: string;
+          capability_key?: string;
+          journey_id?: string | null;
+          goal_id?: string | null;
+          status?: string;
+          current_hint_level?: number;
+          instruction_version?: string;
+          created_at?: string;
+          updated_at?: string;
+          last_message_at?: string;
+          completed_at?: string | null;
+        };
+        Relationships: [];
+      };
+      coaching_messages: {
+        Row: {
+          id: string;
+          session_id: string;
+          role: string;
+          content: string;
+          response_type: string;
+          hint_level: number | null;
+          metadata: Json;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          session_id: string;
+          role: string;
+          content: string;
+          response_type?: string;
+          hint_level?: number | null;
+          metadata?: Json;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          session_id?: string;
+          role?: string;
+          content?: string;
+          response_type?: string;
+          hint_level?: number | null;
+          metadata?: Json;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
+      coaching_session_summaries: {
+        Row: {
+          id: string;
+          session_id: string;
+          explored_topics: string[];
+          key_questions_considered: string[];
+          perspectives_developed: string[];
+          reasoning_demonstrated: string;
+          growth_frontiers: string[];
+          recommended_next_steps: string[];
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          session_id: string;
+          explored_topics?: string[];
+          key_questions_considered?: string[];
+          perspectives_developed?: string[];
+          reasoning_demonstrated: string;
+          growth_frontiers?: string[];
+          recommended_next_steps?: string[];
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          session_id?: string;
+          explored_topics?: string[];
+          key_questions_considered?: string[];
+          perspectives_developed?: string[];
+          reasoning_demonstrated?: string;
+          growth_frontiers?: string[];
+          recommended_next_steps?: string[];
+          created_at?: string;
+        };
+        Relationships: [];
+      };
+      coaching_session_context_snapshots: {
+        Row: {
+          id: string;
+          session_id: string;
+          assessment_summary: Json;
+          journey_goal_summary: Json;
+          user_interests: string[];
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          session_id: string;
+          assessment_summary?: Json;
+          journey_goal_summary?: Json;
+          user_interests?: string[];
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          session_id?: string;
+          assessment_summary?: Json;
+          journey_goal_summary?: Json;
+          user_interests?: string[];
+          created_at?: string;
+        };
+        Relationships: [];
+      };
     };
     Views: {
       [_ in never]: never;

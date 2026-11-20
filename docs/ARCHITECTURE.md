@@ -1,6 +1,6 @@
 # OBHASH Architecture Guide
 
-**Phase:** 4 of 8 (Personalized Growth Journey)  
+**Phase:** 5 of 8 (AI Growth Coach)  
 **Document Status:** Complete & Active
 
 ---
@@ -164,6 +164,15 @@ OBHASH requires a provider-independent AI architecture to prevent vendor lock-in
 - **Timeout Management**: Built-in timeout enforcement (`AI_TIMEOUT_MS`, default 30,000ms) with `AbortSignal` / `Promise.race`.
 - **Error Normalization**: All vendor-specific errors are mapped to `AIServiceError` with standard codes (`CONFIG_ERROR`, `TIMEOUT_ERROR`, `PROVIDER_ERROR`).
 
+### 6.1 AI Growth Coach Architecture (Phase 5)
+
+The AI Growth Coach is built upon the **Human-Centered Intelligence** paradigm ("Coach, don't replace").
+- **Socratic Dialogue Engine**: Calibrated with `temperature: 0.4` to stimulate inquiry without generating unassisted solutions or hallucinating answers.
+- **Progressive Hint Engine**: 4 distinct guidance tiers (Level 0: None, Level 1: Directional, Level 2: Conceptual, Level 3: Specific guidance) to support learners while safeguarding independent struggle.
+- **Contextual Inquiry Actions**: In-session micro-coaching actions (`hint`, `explain`, `perspective`, `challenge`, `summarize`) that steer the dialogue towards deeper cognitive reflection.
+- **Prompt Injection Isolation**: User-provided context and responses are demarcated in untrusted boundary envelopes (`<learner_context>`) to neutralize prompt injection vectors.
+- **Deterministic Socratic Fallback**: Full rule-based dialogue fallback ensuring continuity if the AI provider experiences outages or rate limits.
+
 ---
 
 ## 7. Security Architecture
@@ -176,12 +185,13 @@ OBHASH requires a provider-independent AI architecture to prevent vendor lock-in
 
 ## 8. Integration Plan for Subsequent Phases
 
-| Phase | Planned Capabilities | Integration Touchpoints |
-|---|---|---|
-| **Phase 2: Auth & Onboarding** | User signup, profile completion, age check | Uses `src/lib/supabase/client.ts` and `profiles` table |
-| **Phase 3: Capability Assessments** | Baseline scoring across the 3 capabilities | Uses `src/lib/ai/service.ts` for rubric evaluations |
-| **Phase 4: Growth Journeys** | 7-stage user development roadmap | Uses Supabase for journeys, tasks, and state management |
-| **Phase 5: AI Growth Coach** | Socratic coaching dialogues, guided reflection | Leverages `AIService` with specialized prompt templates |
-| **Phase 6: Practical Challenges** | Creative problem-solving simulations | Interactive client components backed by AI evaluator |
-| **Phase 7: Measurement & Portfolio** | Independence scoring, capability metrics | Analyzes user session telemetry and audit logs |
-| **Phase 8: Polish & Launch Readiness** | Production hardening, performance audits | Leverages baseline logging and health checks |
+| Phase | Planned Capabilities | Integration Touchpoints | Status |
+|---|---|---|---|
+| **Phase 1: Foundation** | Next.js 16, TypeScript, Supabase, AI Provider Layer | Core infrastructure and environment | **Completed** |
+| **Phase 2: Auth & Onboarding** | User signup, profile completion, age check | Uses `src/lib/supabase/client.ts` and `profiles` table | **Completed** |
+| **Phase 3: Capability Assessments** | Baseline scoring across the 3 capabilities | Uses `src/lib/ai/service.ts` for rubric evaluations | **Completed** |
+| **Phase 4: Growth Journeys** | 7-stage user development roadmap | Uses Supabase for journeys, tasks, and state management | **Completed** |
+| **Phase 5: AI Growth Coach** | Socratic coaching dialogues, guided reflection | Leverages `AIService` with specialized prompt templates | **Completed** |
+| **Phase 6: Practical Challenges** | Creative problem-solving simulations | Interactive client components backed by AI evaluator | *Pending Owner Approval* |
+| **Phase 7: Measurement & Portfolio** | Independence scoring, capability metrics | Analyzes user session telemetry and audit logs | *Planned* |
+| **Phase 8: Polish & Launch Readiness** | Production hardening, performance audits | Leverages baseline logging and health checks | *Planned* |

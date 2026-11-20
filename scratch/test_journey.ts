@@ -6,7 +6,6 @@ import { generateDeterministicJourney } from "../src/lib/journeys/generator";
 import { generatePersonalizedJourney } from "../src/lib/ai/journey-generator";
 import {
   saveGrowthJourney,
-  getActiveGrowthJourney,
   getGrowthJourneyById,
   getUserGrowthJourneys,
   updateJourneyStatus,

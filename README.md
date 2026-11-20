@@ -1,10 +1,10 @@
 # OBHASH — Human-Centered Intelligence Platform
 
-**Phase:** Phase 4 of 8 (Personalized Growth Journey)  
+**Phase:** Phase 5 of 8 (AI Growth Coach)  
 **Team:** PastForward  
 **Philosophy:** Human-Centered Intelligence  
 **Target Audience:** Ages 18–30  
-**Status:** Phase 4 Complete — Ready for Review  
+**Status:** Phase 5 Complete — Ready for Review  
 
 ---
 
@@ -67,6 +67,7 @@ Run the migrations in `supabase/migrations/` using Supabase CLI or the Supabase 
 - `20261120010000_phase2_profiles.sql` (Phase 2: Display name, Interests, Growth intentions, Trigger)
 - `20261120020000_phase3_assessments.sql` (Phase 3: Assessment modules, Dimensions, Items, Attempts, Responses, Evaluations, Baseline Profiles)
 - `20261120030000_phase4_growth_journeys.sql` (Phase 4: Growth journeys, Focus areas, Goals, Milestones, Activities, Generation records)
+- `20261120040000_phase5_ai_coach.sql` (Phase 5: Coaching sessions, Messages, Summaries, Context snapshots)
 
 ### 3.4 Run the Development Server
 ```bash
@@ -103,7 +104,11 @@ Open [http://localhost:3000](http://localhost:3000).
 - **Journey Details**: [`/journey/[journeyId]`](http://localhost:3000/journey/demo-journey-1) — Full hierarchical view of focus areas, goals, milestones, and planned activities with interactive status management.
 - **Goal Deep Dive**: [`/journey/[journeyId]/goals/[goalId]`](http://localhost:3000/journey/demo-journey-1/goals/goal-ct-1) — Transparent recommendation explanations, evidence citations, and milestone practice breakdown.
 
-### 4.5 Diagnostic & API Routes
+### 4.5 Phase 5: AI Growth Coach
+- **Coaching Hub**: [`/coach`](http://localhost:3000/coach) — Active & recent session roster, mode selectors (Critical Thinking, Creative Problem-Solving, Curiosity), and quick goal-linked coaching triggers.
+- **Coaching Room**: [`/coach/[sessionId]`](http://localhost:3000/coach/demo-coach-session-1) — Real-time Socratic thinking partner environment featuring 4-tier progressive hints, contextual inquiry actions (explain, explore perspective, challenge assumptions), sliding context snapshot, and grounded session summaries.
+
+### 4.6 Diagnostic & API Routes
 - **System Health**: [`/api/health`](http://localhost:3000/api/health) — Diagnostic status of services.
 - **AI Connectivity**: [`/api/ai/test`](http://localhost:3000/api/ai/test) — AI adapter test route.
 
@@ -123,6 +128,11 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## 6. Documentation Index
 
+- [AI Growth Coach Architecture](file:///Users/kazi/Projects/OBHASH/docs/AI_GROWTH_COACH_ARCHITECTURE.md)
+- [Coaching Framework Specification](file:///Users/kazi/Projects/OBHASH/docs/COACHING_FRAMEWORK.md)
+- [Socratic Coaching Prompts](file:///Users/kazi/Projects/OBHASH/docs/COACHING_PROMPTS.md)
+- [Coaching Database Schema](file:///Users/kazi/Projects/OBHASH/docs/COACHING_DATABASE.md)
+- [Coaching Safety and Reliability Guide](file:///Users/kazi/Projects/OBHASH/docs/COACHING_SAFETY_AND_RELIABILITY.md)
 - [Growth Journey Architecture](file:///Users/kazi/Projects/OBHASH/docs/GROWTH_JOURNEY_ARCHITECTURE.md)
 - [Growth Journey Framework](file:///Users/kazi/Projects/OBHASH/docs/GROWTH_JOURNEY_FRAMEWORK.md)
 - [Personalization Engine Specification](file:///Users/kazi/Projects/OBHASH/docs/PERSONALIZATION_ENGINE.md)

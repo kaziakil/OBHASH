@@ -114,6 +114,13 @@ export function DashboardClientView({
             >
               My Journey
             </button>
+            <Link
+              href="/coach"
+              className="px-3.5 py-1.5 rounded-lg text-emerald-800 dark:text-emerald-400 font-semibold hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors flex items-center gap-1.5"
+            >
+              <span>🌱</span>
+              <span>Growth Coach</span>
+            </Link>
             <button
               onClick={() => setActiveTab("profile")}
               className={`px-3.5 py-1.5 rounded-lg transition-colors cursor-pointer ${
@@ -338,6 +345,31 @@ export function DashboardClientView({
                   );
                 })}
               </div>
+            </div>
+
+            {/* AI Growth Coach Banner */}
+            <div className="rounded-2xl border border-emerald-200 dark:border-emerald-800/80 bg-gradient-to-r from-emerald-50/80 via-teal-50/50 to-stone-50 p-6 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="space-y-1.5">
+                <div className="flex items-center space-x-2">
+                  <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800">
+                    Phase 5 Active
+                  </span>
+                  <span className="text-xs font-mono text-stone-500">Socratic Thinking Partner</span>
+                </div>
+                <h3 className="text-lg font-serif font-bold text-stone-900">
+                  Practice with the AI Growth Coach
+                </h3>
+                <p className="text-xs text-stone-600 max-w-xl leading-relaxed">
+                  Engage in Socratic mentorship to deconstruct arguments, reframe constraints, and
+                  develop multi-tier question trees—without AI doing the thinking for you.
+                </p>
+              </div>
+              <Link
+                href="/coach"
+                className="px-5 py-2.5 rounded-xl bg-emerald-800 text-white font-medium text-xs hover:bg-emerald-900 transition shadow-sm whitespace-nowrap self-start sm:self-center"
+              >
+                Open Growth Coach →
+              </Link>
             </div>
 
             {/* Seven-Stage Journey Preview */}

@@ -1,6 +1,6 @@
 # OBHASH Database & Schema Reference
 
-**Phase:** 2 of 8  
+**Phase:** 5 of 8  
 **Storage Engine:** Supabase PostgreSQL  
 **Access Model:** Row Level Security (RLS)  
 
@@ -145,3 +145,10 @@ CREATE TRIGGER on_auth_user_created
    - Created `planned_activities` (bite-sized 15-30m practice exercises).
    - Created `journey_generation_records` (LLM & deterministic engine audit logs).
    - Enforced Row Level Security (RLS) on all growth journey entities.
+5. `20261120040000_phase5_ai_coach.sql` (Phase 5):
+   - Created `coaching_sessions` (active and historical coaching engagements).
+   - Created `coaching_messages` (multi-turn Socratic interaction logs with hint levels and response types).
+   - Created `coaching_session_summaries` (grounded session syntheses, breakthroughs, insights, and next steps).
+   - Created `coaching_session_context_snapshots` (learner baseline and goal state captured at session start).
+   - Enforced Row Level Security (RLS) on all coaching entities (`auth.uid() = user_id`).
+   - Detailed schema reference documented in [Coaching Database Schema](file:///Users/kazi/Projects/OBHASH/docs/COACHING_DATABASE.md).

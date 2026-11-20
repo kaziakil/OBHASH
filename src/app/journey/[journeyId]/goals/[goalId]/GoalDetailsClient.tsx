@@ -120,7 +120,14 @@ export function GoalDetailsClient({
               </p>
             </div>
 
-            <div>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2">
+              <Link
+                href={`/coach?capabilityKey=${goal.capabilityKey}&journeyId=${journeyId}&goalId=${goal.id}`}
+                className="px-3 py-1.5 rounded-xl bg-emerald-800 text-white text-xs font-semibold hover:bg-emerald-900 transition flex items-center space-x-1.5 shadow-2xs whitespace-nowrap"
+              >
+                <span>🌱</span>
+                <span>Coach on this Goal →</span>
+              </Link>
               <select
                 value={goal.status}
                 onChange={(e) => handleGoalStatusChange(e.target.value as GoalStatus)}
