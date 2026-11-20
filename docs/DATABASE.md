@@ -128,3 +128,12 @@ CREATE TRIGGER on_auth_user_created
    - Added `display_name`, `bio`, `interests`, `growth_intentions`, `onboarding_completed`, `preferred_language`.
    - Added user signup trigger `handle_new_user()`.
    - Added index on `onboarding_completed`.
+3. `20261120020000_phase3_assessments.sql` (Phase 3):
+   - Created `assessment_modules` (modules and capability keys).
+   - Created `assessment_dimensions` (dimensions per module).
+   - Created `assessment_items` (activities, scenarios, and rubrics).
+   - Created `assessment_attempts` (user test sessions).
+   - Created `assessment_responses` (user answers).
+   - Created `assessment_evaluations` (rubric score records).
+   - Created `capability_profiles` (aggregated capability baselines).
+   - Enforced Row Level Security (RLS) on all assessment tables (`auth.uid() = user_id`).

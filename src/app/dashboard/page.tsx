@@ -1,6 +1,7 @@
 import React from "react";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { CORE_CAPABILITIES, APP_METADATA } from "@/config/constants";
+import { getUserCapabilityProfiles } from "@/lib/assessments/actions";
 import { DashboardClientView } from "./DashboardClientView";
 
 export default async function DashboardPage() {
@@ -24,8 +25,15 @@ export default async function DashboardPage() {
     }
   }
 
+  // Retrieve user's capability baselines
+  const capabilityProfiles = await getUserCapabilityProfiles();
+
   // Fallback display values if unconfigured or profile loading
-  const displayName = profile?.display_name || user?.user_metadata?.display_name || user?.email?.split("@")[0] || "Explorer";
+  const displayName =
+    profile?.display_name ||
+    user?.user_metadata?.display_name ||
+    user?.email?.split("@")[0] ||
+    "Explorer";
   const email = user?.email || "user@example.com";
   const interests = profile?.interests || [];
   const growthIntentions = profile?.growth_intentions || [];
@@ -39,6 +47,7 @@ export default async function DashboardPage() {
       isSupabaseConfigured={isSupabaseConfigured}
       capabilities={CORE_CAPABILITIES}
       appName={APP_METADATA.name}
+      capabilityProfiles={capabilityProfiles}
     />
   );
 }
