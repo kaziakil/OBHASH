@@ -11,6 +11,7 @@ const NAV_LINKS = [
   { href: "/journey", label: "Journey" },
   { href: "/growth/independence", label: "Independence" },
   { href: "/portfolio", label: "Portfolio" },
+  { href: "/docs", label: "Docs / Deck" },
   { href: "/dashboard", label: "Dashboard" },
 ];
 

@@ -105,6 +105,11 @@ export function Footer() {
             </span>
             <ul className="space-y-2 text-xs">
               <li>
+                <Link href="/docs" className="hover:text-[#5B3BFF] text-[#5B3BFF] font-semibold transition-colors">
+                  Live Docs & Pitch Deck ↗
+                </Link>
+              </li>
+              <li>
                 <Link href="/login" className="hover:text-[#5B3BFF] transition-colors">
                   Sign In
                 </Link>
