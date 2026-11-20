@@ -135,6 +135,13 @@ export function DashboardClientView({
               <span>📁</span>
               <span>My Work</span>
             </Link>
+            <Link
+              href="/growth/independence"
+              className="px-3.5 py-1.5 rounded-lg text-indigo-700 dark:text-indigo-400 font-semibold hover:bg-indigo-50 dark:hover:bg-indigo-950/40 transition-colors flex items-center gap-1.5"
+            >
+              <span>🧭</span>
+              <span>Independence</span>
+            </Link>
             <button
               onClick={() => setActiveTab("profile")}
               className={`px-3.5 py-1.5 rounded-lg transition-colors cursor-pointer ${
@@ -418,6 +425,38 @@ export function DashboardClientView({
               </div>
             </div>
 
+            {/* Phase 7 Independence & Portfolio Highlights */}
+            <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-gradient-to-r from-emerald-50/50 via-sky-50/30 to-indigo-50/40 dark:from-emerald-950/20 dark:via-sky-950/10 dark:to-indigo-950/20 p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 shadow-sm">
+              <div className="space-y-2">
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800">
+                    Phase 7 Active
+                  </span>
+                  <span className="text-xs font-mono text-zinc-500">Independence Engine & Portfolio</span>
+                </div>
+                <h3 className="text-lg font-bold text-zinc-900 dark:text-zinc-100">
+                  Measure Independence & Curate Your Growth Portfolio
+                </h3>
+                <p className="text-xs text-zinc-600 dark:text-zinc-400 max-w-xl leading-relaxed">
+                  Track verifiable evidence across 5 independence dimensions, review transparent AI assistance classifications (Levels A–E), and curate your public growth showcase.
+                </p>
+              </div>
+              <div className="flex items-center gap-2 self-start sm:self-center">
+                <Link
+                  href="/growth/independence"
+                  className="px-4 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 font-medium text-xs hover:bg-zinc-100 dark:hover:bg-zinc-800 transition whitespace-nowrap"
+                >
+                  Independence Insights →
+                </Link>
+                <Link
+                  href="/portfolio"
+                  className="px-5 py-2.5 rounded-xl bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 font-semibold text-xs hover:bg-zinc-800 transition shadow-sm whitespace-nowrap"
+                >
+                  Open Portfolio →
+                </Link>
+              </div>
+            </div>
+
             {/* Seven-Stage Journey Preview */}
             <div className="space-y-4">
               <div className="border-b border-zinc-200 dark:border-zinc-800 pb-3">
@@ -657,19 +696,68 @@ export function DashboardClientView({
           </div>
         )}
 
-        {/* Tab 4: Portfolio (Coming Soon State) */}
+        {/* Tab 4: Portfolio */}
         {activeTab === "portfolio" && (
-          <div className="text-center py-16 space-y-4 rounded-2xl border border-dashed border-zinc-300 dark:border-zinc-800 bg-white dark:bg-zinc-900/40 p-8 animate-in fade-in duration-150">
-            <span className="text-4xl">📁</span>
-            <h3 className="text-xl font-bold text-zinc-900 dark:text-zinc-100">
-              Personal Growth Portfolio
-            </h3>
-            <p className="text-sm text-zinc-500 dark:text-zinc-400 max-w-md mx-auto">
-              Your portfolio will store your verified challenge submissions, reflections, and independence benchmarks.
-            </p>
-            <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">
-              Scheduled for Phase 7
-            </span>
+          <div className="space-y-6 animate-in fade-in duration-150">
+            <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 p-8 space-y-6 shadow-sm">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-100 dark:border-zinc-800 pb-6">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800">
+                      Portfolio Active • Public
+                    </span>
+                    <span className="text-xs text-zinc-500 font-mono">/p/alex-chen</span>
+                  </div>
+                  <h3 className="text-2xl font-black text-zinc-900 dark:text-zinc-100 mt-2">
+                    Alex Chen — Capability Showcase
+                  </h3>
+                  <p className="text-xs text-indigo-700 dark:text-indigo-400 font-semibold mt-0.5">
+                    Curious Systems Thinker & Human-Centered Problem Solver
+                  </p>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <Link
+                    href="/p/alex-chen"
+                    target="_blank"
+                    className="text-xs font-semibold px-3.5 py-2 rounded-lg border border-zinc-300 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-800 dark:text-zinc-200 transition-colors"
+                  >
+                    View Public Showcase ↗
+                  </Link>
+                  <Link
+                    href="/portfolio"
+                    className="text-xs font-semibold px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white shadow-sm transition-all"
+                  >
+                    Edit & Curate Portfolio →
+                  </Link>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 space-y-1">
+                  <span className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Featured Projects</span>
+                  <p className="text-lg font-black text-zinc-900 dark:text-zinc-100">Everyday Innovation: 3 Paradigms</p>
+                  <p className="text-xs text-zinc-500">Trayless dining, micro-demand predictive app, clean plate credit.</p>
+                </div>
+                <div className="p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 space-y-1">
+                  <span className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Independence Grounding</span>
+                  <p className="text-lg font-black text-zinc-900 dark:text-zinc-100">Level A (Wholly Independent)</p>
+                  <p className="text-xs text-zinc-500">Verified by rubric with zero uncredited external generation.</p>
+                </div>
+                <div className="p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 space-y-1">
+                  <span className="text-xs font-bold text-zinc-400 uppercase tracking-wider">AI Engagement Stance</span>
+                  <p className="text-lg font-black text-zinc-900 dark:text-zinc-100">Collaborative Partner</p>
+                  <p className="text-xs text-zinc-500">Consults AI for counterarguments while retaining core reasoning.</p>
+                </div>
+              </div>
+
+              <div className="pt-2 flex justify-between items-center text-xs text-zinc-500">
+                <span>Manage sections, custom reflections, and sharing permissions.</span>
+                <Link href="/growth/independence" className="font-semibold text-indigo-600 dark:text-indigo-400 hover:underline">
+                  Inspect Independence Dimensions →
+                </Link>
+              </div>
+            </div>
           </div>
         )}
       </div>

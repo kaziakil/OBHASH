@@ -164,3 +164,14 @@ CREATE TRIGGER on_auth_user_created
    - Created `challenge_ai_assistance_records` (auditable logs of AI consultations, hint levels, and action types).
    - Enforced Row Level Security (RLS) on all user data (`auth.uid() = user_id`).
    - Detailed schema reference documented in [Challenge Database Schema](file:///Users/kazi/Projects/OBHASH/docs/CHALLENGE_DATABASE.md).
+7. `20261120060000_phase7_portfolio_independence.sql` (Phase 7):
+   - Created `independence_framework_versions` (v1.0.0 framework configuration).
+   - Created `independence_dimensions` (5 operational dimensions and observable behavior indicators).
+   - Created `independence_observations` (traceable observable behavior records tied to authentic evidence).
+   - Created `independence_measurement_snapshots` (immutable historical measurement snapshots).
+   - Created `portfolios` (user-controlled growth portfolio root and public slug index).
+   - Created `portfolio_sections` (6 structured configurable sections).
+   - Created `portfolio_items` (user-selected featured work, reflections, and journey highlights with AI disclosures).
+   - Created `portfolio_publication_settings` (visibility, indexing, and display toggles).
+   - Enforced Row Level Security (RLS) on all user tables with controlled public read access for published portfolios.
+   - Detailed schema reference documented in [Phase 7 Database Schema](file:///Users/kazi/Projects/OBHASH/docs/PHASE_7_DATABASE.md).

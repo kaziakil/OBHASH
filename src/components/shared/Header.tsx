@@ -21,9 +21,6 @@ export function Header() {
         </Link>
 
         <nav className="hidden md:flex items-center gap-5 text-xs font-semibold text-zinc-600 dark:text-zinc-400">
-          <Link href="/#philosophy" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
-            Philosophy
-          </Link>
           <Link href="/challenges" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
             Challenges
           </Link>
@@ -32,6 +29,12 @@ export function Header() {
           </Link>
           <Link href="/journey" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
             Journey
+          </Link>
+          <Link href="/growth/independence" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+            Independence
+          </Link>
+          <Link href="/portfolio" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+            Portfolio
           </Link>
           <Link href="/dashboard" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
             Dashboard

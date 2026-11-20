@@ -1148,6 +1148,339 @@ export interface Database {
         };
         Relationships: [];
       };
+      independence_framework_versions: {
+        Row: {
+          id: string;
+          version_code: string;
+          name: string;
+          description: string | null;
+          is_active: boolean;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          version_code: string;
+          name: string;
+          description?: string | null;
+          is_active?: boolean;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          version_code?: string;
+          name?: string;
+          description?: string | null;
+          is_active?: boolean;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
+      independence_dimensions: {
+        Row: {
+          id: string;
+          framework_version_id: string;
+          dimension_key: string;
+          title: string;
+          description: string;
+          observable_behavior_indicators: Json;
+          order_index: number;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          framework_version_id: string;
+          dimension_key: string;
+          title: string;
+          description: string;
+          observable_behavior_indicators?: Json;
+          order_index?: number;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          framework_version_id?: string;
+          dimension_key?: string;
+          title?: string;
+          description?: string;
+          observable_behavior_indicators?: Json;
+          order_index?: number;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
+      independence_observations: {
+        Row: {
+          id: string;
+          user_id: string;
+          dimension_key: string;
+          behavior_key: string;
+          behavior_description: string;
+          source_type: string;
+          source_record_id: string;
+          source_title: string;
+          evidence_quote: string | null;
+          evidence_analysis: string | null;
+          ai_assistance_classification: string;
+          ai_assistance_notes: string | null;
+          confidence_score: number;
+          observed_at: string;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          dimension_key: string;
+          behavior_key: string;
+          behavior_description: string;
+          source_type: string;
+          source_record_id: string;
+          source_title: string;
+          evidence_quote?: string | null;
+          evidence_analysis?: string | null;
+          ai_assistance_classification?: string;
+          ai_assistance_notes?: string | null;
+          confidence_score?: number;
+          observed_at?: string;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          dimension_key?: string;
+          behavior_key?: string;
+          behavior_description?: string;
+          source_type?: string;
+          source_record_id?: string;
+          source_title?: string;
+          evidence_quote?: string | null;
+          evidence_analysis?: string | null;
+          ai_assistance_classification?: string;
+          ai_assistance_notes?: string | null;
+          confidence_score?: number;
+          observed_at?: string;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
+      independence_measurement_snapshots: {
+        Row: {
+          id: string;
+          user_id: string;
+          framework_version: string;
+          dimension_snapshots: Json;
+          ai_assistance_breakdown: Json;
+          development_narrative: string;
+          limitations_notice: string;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          framework_version?: string;
+          dimension_snapshots?: Json;
+          ai_assistance_breakdown?: Json;
+          development_narrative: string;
+          limitations_notice: string;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          framework_version?: string;
+          dimension_snapshots?: Json;
+          ai_assistance_breakdown?: Json;
+          development_narrative?: string;
+          limitations_notice?: string;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
+      portfolios: {
+        Row: {
+          id: string;
+          user_id: string;
+          public_slug: string;
+          display_name: string;
+          headline: string | null;
+          personal_introduction: string | null;
+          learning_philosophy: string | null;
+          areas_of_interest: string[];
+          is_published: boolean;
+          visibility: string;
+          published_at: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          public_slug: string;
+          display_name: string;
+          headline?: string | null;
+          personal_introduction?: string | null;
+          learning_philosophy?: string | null;
+          areas_of_interest?: string[];
+          is_published?: boolean;
+          visibility?: string;
+          published_at?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          public_slug?: string;
+          display_name?: string;
+          headline?: string | null;
+          personal_introduction?: string | null;
+          learning_philosophy?: string | null;
+          areas_of_interest?: string[];
+          is_published?: boolean;
+          visibility?: string;
+          published_at?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      portfolio_sections: {
+        Row: {
+          id: string;
+          portfolio_id: string;
+          section_type: string;
+          title: string;
+          subtitle: string | null;
+          is_visible: boolean;
+          order_index: number;
+          custom_notes: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          portfolio_id: string;
+          section_type: string;
+          title: string;
+          subtitle?: string | null;
+          is_visible?: boolean;
+          order_index?: number;
+          custom_notes?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          portfolio_id?: string;
+          section_type?: string;
+          title?: string;
+          subtitle?: string | null;
+          is_visible?: boolean;
+          order_index?: number;
+          custom_notes?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      portfolio_items: {
+        Row: {
+          id: string;
+          portfolio_id: string;
+          section_id: string;
+          source_type: string;
+          source_record_id: string | null;
+          title: string;
+          description: string;
+          capability_key: string | null;
+          dimensions: string[];
+          user_reflection: string | null;
+          ai_assistance_level: string;
+          ai_assistance_disclosure: string | null;
+          artifacts: Json;
+          order_index: number;
+          is_featured: boolean;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          portfolio_id: string;
+          section_id: string;
+          source_type: string;
+          source_record_id?: string | null;
+          title: string;
+          description: string;
+          capability_key?: string | null;
+          dimensions?: string[];
+          user_reflection?: string | null;
+          ai_assistance_level?: string;
+          ai_assistance_disclosure?: string | null;
+          artifacts?: Json;
+          order_index?: number;
+          is_featured?: boolean;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          portfolio_id?: string;
+          section_id?: string;
+          source_type?: string;
+          source_record_id?: string | null;
+          title?: string;
+          description?: string;
+          capability_key?: string | null;
+          dimensions?: string[];
+          user_reflection?: string | null;
+          ai_assistance_level?: string;
+          ai_assistance_disclosure?: string | null;
+          artifacts?: Json;
+          order_index?: number;
+          is_featured?: boolean;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      portfolio_publication_settings: {
+        Row: {
+          id: string;
+          portfolio_id: string;
+          allow_search_indexing: boolean;
+          show_capability_badges: boolean;
+          show_ai_disclosures: boolean;
+          show_reflections: boolean;
+          show_journey_timeline: boolean;
+          custom_share_message: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          portfolio_id: string;
+          allow_search_indexing?: boolean;
+          show_capability_badges?: boolean;
+          show_ai_disclosures?: boolean;
+          show_reflections?: boolean;
+          show_journey_timeline?: boolean;
+          custom_share_message?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          portfolio_id?: string;
+          allow_search_indexing?: boolean;
+          show_capability_badges?: boolean;
+          show_ai_disclosures?: boolean;
+          show_reflections?: boolean;
+          show_journey_timeline?: boolean;
+          custom_share_message?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
     };
     Views: {
       [_ in never]: never;

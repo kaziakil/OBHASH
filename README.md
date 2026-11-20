@@ -1,10 +1,10 @@
 # OBHASH — Human-Centered Intelligence Platform
 
-**Phase:** Phase 6 of 8 (Challenge & Reflection Workspace)  
+**Phase:** Phase 7 of 8 (Independence Measurement & Growth Portfolio)  
 **Team:** PastForward  
 **Philosophy:** Human-Centered Intelligence  
 **Target Audience:** Ages 18–30  
-**Status:** Phase 6 Complete — Ready for Review  
+**Status:** Phase 7 Complete — Ready for Review  
 
 ---
 
@@ -69,6 +69,7 @@ Run the migrations in `supabase/migrations/` using Supabase CLI or the Supabase 
 - `20261120030000_phase4_growth_journeys.sql` (Phase 4: Growth journeys, Focus areas, Goals, Milestones, Activities, Generation records)
 - `20261120040000_phase5_ai_coach.sql` (Phase 5: Coaching sessions, Messages, Summaries, Context snapshots)
 - `20261120050000_phase6_challenges.sql` (Phase 6: Challenges catalog, Versions, Attempts, Drafts, Submissions, Evaluations, Reflections, Bookmarks, AI assistance records)
+- `20261120060000_phase7_portfolio_independence.sql` (Phase 7: Independence framework, Dimensions, Observations, Snapshots, Portfolios, Sections, Items, Publication settings)
 
 ### 3.4 Run the Development Server
 ```bash
@@ -117,7 +118,12 @@ Open [http://localhost:3000](http://localhost:3000).
 - **Metacognitive Reflection**: [`/workspace/[attemptId]/reflection`](http://localhost:3000/workspace/demo-attempt-completed/reflection) — Capability-tailored reflection workspace with persistent responses, AI usage inquiry, and completion lifecycle progression.
 - **My Work Workspace**: [`/my-work`](http://localhost:3000/my-work) — Centralized practice overview tracking drafts, submissions, evaluations, reflections, and bookmarked challenges.
 
-### 4.7 Diagnostic & API Routes
+### 4.7 Phase 7: Independence Measurement & Growth Portfolio
+- **Independence Dashboard**: [`/growth/independence`](http://localhost:3000/growth/independence) — Evidence-grounded evaluation across 5 dimensions (Independent Reasoning, Self-Directed Exploration, Independent Problem-Solving, Thoughtful AI Use, Reflection and Self-Direction) with 4 sufficiency states, 5-tier AI assistance classification (Levels A–E), and capability development history.
+- **Growth Portfolio Hub & Editor**: [`/portfolio`](http://localhost:3000/portfolio) — User-controlled personal portfolio editor featuring personal introduction, capability overview, featured challenge work, development journey, thoughtful AI disclosures, personal reflections, and publication controls.
+- **Public Portfolio Showcase**: [`/p/[publicSlug]`](http://localhost:3000/p/alex-chen) — Read-only, clean, print/PDF-ready public showcase for verified artifacts and metacognitive reflections.
+
+### 4.8 Diagnostic & API Routes
 - **System Health**: [`/api/health`](http://localhost:3000/api/health) — Diagnostic status of services.
 - **AI Connectivity**: [`/api/ai/test`](http://localhost:3000/api/ai/test) — AI adapter test route.
 
@@ -137,6 +143,13 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## 6. Documentation Index
 
+- [Independence Framework](file:///Users/kazi/Projects/OBHASH/docs/INDEPENDENCE_FRAMEWORK.md)
+- [Evidence Architecture](file:///Users/kazi/Projects/OBHASH/docs/EVIDENCE_ARCHITECTURE.md)
+- [Independence Measurement Engine](file:///Users/kazi/Projects/OBHASH/docs/INDEPENDENCE_MEASUREMENT_ENGINE.md)
+- [AI Assistance Classification](file:///Users/kazi/Projects/OBHASH/docs/AI_ASSISTANCE_CLASSIFICATION.md)
+- [Growth Portfolio Framework](file:///Users/kazi/Projects/OBHASH/docs/GROWTH_PORTFOLIO_FRAMEWORK.md)
+- [Portfolio Security & Privacy](file:///Users/kazi/Projects/OBHASH/docs/PORTFOLIO_SECURITY.md)
+- [Phase 7 Database Schema](file:///Users/kazi/Projects/OBHASH/docs/PHASE_7_DATABASE.md)
 - [Challenge System Architecture](file:///Users/kazi/Projects/OBHASH/docs/CHALLENGE_SYSTEM_ARCHITECTURE.md)
 - [Challenge Framework Specification](file:///Users/kazi/Projects/OBHASH/docs/CHALLENGE_FRAMEWORK.md)
 - [Challenge Evaluation Framework](file:///Users/kazi/Projects/OBHASH/docs/CHALLENGE_EVALUATION_FRAMEWORK.md)
