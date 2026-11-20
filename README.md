@@ -1,10 +1,10 @@
 # OBHASH — Human-Centered Intelligence Platform
 
-**Phase:** Phase 7 of 8 (Independence Measurement & Growth Portfolio)  
+**Phase:** Phase 8 of 8 (Integration, Testing & Competition Launch)  
 **Team:** PastForward  
 **Philosophy:** Human-Centered Intelligence  
 **Target Audience:** Ages 18–30  
-**Status:** Phase 7 Complete — Ready for Review  
+**Status:** Prototype Complete — Ready for Live Competition Demonstration  
 
 ---
 
@@ -77,6 +77,13 @@ npm run dev
 ```
 Open [http://localhost:3000](http://localhost:3000).
 
+### 3.5 Run End-to-End Verification
+```bash
+npx tsx scratch/test_phase8_e2e.ts # Master 35-test E2E journey verification
+npm run typecheck                  # Strict TypeScript compiler verification
+npm run lint                       # ESLint zero-warning check
+```
+
 ---
 
 ## 4. Key Routes Implemented
@@ -143,6 +150,13 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## 6. Documentation Index
 
+### Phase 8 Launch & Demonstration Documentation
+- [Live Demonstration & Presentation Guide](file:///Users/kazi/Projects/OBHASH/docs/DEMO_GUIDE.md)
+- [Verification & Testing Master Report](file:///Users/kazi/Projects/OBHASH/docs/TESTING.md)
+- [Production Deployment & Infrastructure Guide](file:///Users/kazi/Projects/OBHASH/docs/DEPLOYMENT.md)
+- [Known Limitations & System Boundaries](file:///Users/kazi/Projects/OBHASH/docs/KNOWN_LIMITATIONS.md)
+
+### Foundational Architecture & Phase Specifications
 - [Independence Framework](file:///Users/kazi/Projects/OBHASH/docs/INDEPENDENCE_FRAMEWORK.md)
 - [Evidence Architecture](file:///Users/kazi/Projects/OBHASH/docs/EVIDENCE_ARCHITECTURE.md)
 - [Independence Measurement Engine](file:///Users/kazi/Projects/OBHASH/docs/INDEPENDENCE_MEASUREMENT_ENGINE.md)
