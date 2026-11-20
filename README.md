@@ -1,9 +1,10 @@
 # OBHASH — Human-Centered Intelligence Platform
 
-**Phase 1: Foundation & Project Setup**  
+**Phase:** Phase 2 of 8 (User Experience & Onboarding)  
 **Team:** PastForward  
 **Philosophy:** Human-Centered Intelligence  
 **Target Audience:** Ages 18–30  
+**Status:** Phase 2 Complete — Ready for Review  
 
 ---
 
@@ -25,50 +26,63 @@ The platform focuses on three foundational human capabilities:
 | Layer | Technology | Version | Purpose |
 |---|---|---|---|
 | **Framework** | Next.js (App Router) | 16.4.6 | Full-stack React framework with SSR and Turbopack |
-| **Language** | TypeScript | 5.x | End-to-end static typing and contract safety |
-| **UI & Styling** | Tailwind CSS & React | 4.x / 19.3.0 | Modern utility styling and accessible component architecture |
-| **Database** | Supabase (PostgreSQL) | Latest | Managed relational database with Row Level Security (RLS) |
+| **Language** | TypeScript | 5.9.3 | Strict end-to-end typing across DB, API, and UI |
+| **Styling** | Tailwind CSS | 4.3.3 | Modern utility styling with `@tailwindcss/turbopack` |
+| **UI Components** | React & React DOM | 19.3.0 | Accessible components, React Server Components |
+| **Database** | Supabase (PostgreSQL) | Latest | Relational database with Row Level Security (RLS) |
 | **Authentication** | Supabase Auth (`@supabase/ssr`) | Latest | Secure cookie-based SSR session management |
 | **AI Integration** | Server-side LLM Layer | Modular | Provider-agnostic adapter (Google Gemini / OpenAI compatible) |
-| **Validation** | Zod | 3.x | Schema-driven environment and request validation |
+| **Validation** | Zod | 3.24.2 | Schema-driven environment and request validation |
 | **Deployment** | Vercel-compatible | — | Edge-ready serverless/Node.js hosting |
 
 ---
 
-## 3. Prerequisites
+## 3. Quick Start
 
-- **Node.js**: v20.x or higher (tested on Node v24.11.1)
-- **Package Manager**: `npm` (v11+), `pnpm` (v12+), or `yarn`
-- **Git**: Installed and configured
-
----
-
-## 4. Quick Start
-
-### 4.1 Clone and Install
+### 3.1 Install Dependencies
 ```bash
-# Clone the repository
 git clone <repo-url>
 cd OBHASH
-
-# Install dependencies
 npm install
 ```
 
-### 4.2 Configure Environment
+### 3.2 Configure Environment
 ```bash
-# Copy the environment template
 cp .env.example .env.local
 ```
-Edit `.env.local` with your credentials:
-- Set `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` from your Supabase project.
-- Set `GEMINI_API_KEY` (or `OPENAI_API_KEY`) from your AI provider dashboard.
+Add your Supabase project URL and anon key:
+```ini
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+GEMINI_API_KEY=your-gemini-key
+AI_PROVIDER=gemini
+```
 
-### 4.3 Run the Development Server
+### 3.3 Apply Database Migrations
+Run the migrations in `supabase/migrations/` using Supabase CLI or the Supabase SQL Editor:
+- `20261120000000_initial_schema.sql` (Phase 1: Profiles, Capabilities, Audit Logs, RLS)
+- `20261120010000_phase2_profiles.sql` (Phase 2: Display name, Interests, Growth intentions, Trigger)
+
+### 3.4 Run the Development Server
 ```bash
 npm run dev
 ```
-Open [http://localhost:3000](http://localhost:3000) to view the application.
+Open [http://localhost:3000](http://localhost:3000).
+
+---
+
+## 4. Key Routes Implemented
+
+- **Public Landing Page**: [`/`](http://localhost:3000/) — Complete brand presentation, philosophy, approach, 3 capabilities, and 7-stage framework.
+- **Sign In**: [`/login`](http://localhost:3000/login) — Supabase Auth login.
+- **Sign Up**: [`/signup`](http://localhost:3000/signup) — Supabase Auth registration.
+- **Password Recovery**: [`/forgot-password`](http://localhost:3000/forgot-password) — Password reset request.
+- **User Onboarding**: [`/onboarding`](http://localhost:3000/onboarding) — 5-step conversational onboarding flow.
+- **User Dashboard**: [`/dashboard`](http://localhost:3000/dashboard) — Authenticated personal home, capability preview, and next-step prompt.
+- **User Settings**: [`/settings`](http://localhost:3000/settings) — Profile editing, interests, growth intentions, and sign out.
+- **System Health**: [`/api/health`](http://localhost:3000/api/health) — Diagnostic status of services.
+- **AI Connectivity**: [`/api/ai/test`](http://localhost:3000/api/ai/test) — AI adapter test route.
 
 ---
 
@@ -84,28 +98,12 @@ Open [http://localhost:3000](http://localhost:3000) to view the application.
 
 ---
 
-## 6. Verification Endpoints
+## 6. Documentation Index
 
-- **Health Check API**: `GET /api/health` — Inspects application uptime, environment configuration status, Supabase connection, and AI provider readiness.
-- **AI Connectivity Test**: `GET /api/ai/test` — Performs a lightweight provider-level roundtrip without invoking coaching logic.
-
----
-
-## 7. Documentation Index
-
-- [Architecture Guide](file:///Users/kazi/Projects/OBHASH/docs/ARCHITECTURE.md)
+- [User Experience Guide](file:///Users/kazi/Projects/OBHASH/docs/USER_EXPERIENCE.md)
+- [Database & Schema Reference](file:///Users/kazi/Projects/OBHASH/docs/DATABASE.md)
+- [Authentication Architecture](file:///Users/kazi/Projects/OBHASH/docs/AUTHENTICATION.md)
+- [System Architecture](file:///Users/kazi/Projects/OBHASH/docs/ARCHITECTURE.md)
 - [Local Setup Guide](file:///Users/kazi/Projects/OBHASH/docs/SETUP.md)
 - [Environment Configuration](file:///Users/kazi/Projects/OBHASH/docs/ENVIRONMENT.md)
-- [Technical Decisions & Rationale](file:///Users/kazi/Projects/OBHASH/docs/TECHNICAL_DECISIONS.md)
-- [Database Migrations](file:///Users/kazi/Projects/OBHASH/supabase/README.md)
-
----
-
-## 8. Troubleshooting
-
-- **Supabase shows "unconfigured" on `/api/health`**:
-  Ensure `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` are defined in `.env.local`. Restart `npm run dev` after updating `.env.local`.
-- **AI Service shows "unconfigured"**:
-  Ensure `GEMINI_API_KEY` (or `OPENAI_API_KEY`) is set in `.env.local` and `AI_PROVIDER` matches the key provided.
-- **Port 3000 in use**:
-  Run `PORT=3001 npm run dev` or stop the competing process.
+- [Technical Decisions](file:///Users/kazi/Projects/OBHASH/docs/TECHNICAL_DECISIONS.md)
