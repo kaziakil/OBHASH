@@ -20,18 +20,21 @@ export function Header() {
           </div>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-6 text-xs font-semibold text-zinc-600 dark:text-zinc-400">
+        <nav className="hidden md:flex items-center gap-5 text-xs font-semibold text-zinc-600 dark:text-zinc-400">
           <Link href="/#philosophy" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
             Philosophy
           </Link>
-          <Link href="/#approach" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
-            Approach
+          <Link href="/challenges" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+            Challenges
           </Link>
-          <Link href="/#capabilities" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
-            Capabilities
+          <Link href="/coach" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+            Growth Coach
           </Link>
-          <Link href="/#journey" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+          <Link href="/journey" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
             Journey
+          </Link>
+          <Link href="/dashboard" className="hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+            Dashboard
           </Link>
         </nav>
 

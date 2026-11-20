@@ -1,10 +1,10 @@
 # OBHASH — Human-Centered Intelligence Platform
 
-**Phase:** Phase 5 of 8 (AI Growth Coach)  
+**Phase:** Phase 6 of 8 (Challenge & Reflection Workspace)  
 **Team:** PastForward  
 **Philosophy:** Human-Centered Intelligence  
 **Target Audience:** Ages 18–30  
-**Status:** Phase 5 Complete — Ready for Review  
+**Status:** Phase 6 Complete — Ready for Review  
 
 ---
 
@@ -68,6 +68,7 @@ Run the migrations in `supabase/migrations/` using Supabase CLI or the Supabase 
 - `20261120020000_phase3_assessments.sql` (Phase 3: Assessment modules, Dimensions, Items, Attempts, Responses, Evaluations, Baseline Profiles)
 - `20261120030000_phase4_growth_journeys.sql` (Phase 4: Growth journeys, Focus areas, Goals, Milestones, Activities, Generation records)
 - `20261120040000_phase5_ai_coach.sql` (Phase 5: Coaching sessions, Messages, Summaries, Context snapshots)
+- `20261120050000_phase6_challenges.sql` (Phase 6: Challenges catalog, Versions, Attempts, Drafts, Submissions, Evaluations, Reflections, Bookmarks, AI assistance records)
 
 ### 3.4 Run the Development Server
 ```bash
@@ -108,7 +109,15 @@ Open [http://localhost:3000](http://localhost:3000).
 - **Coaching Hub**: [`/coach`](http://localhost:3000/coach) — Active & recent session roster, mode selectors (Critical Thinking, Creative Problem-Solving, Curiosity), and quick goal-linked coaching triggers.
 - **Coaching Room**: [`/coach/[sessionId]`](http://localhost:3000/coach/demo-coach-session-1) — Real-time Socratic thinking partner environment featuring 4-tier progressive hints, contextual inquiry actions (explain, explore perspective, challenge assumptions), sliding context snapshot, and grounded session summaries.
 
-### 4.6 Diagnostic & API Routes
+### 4.6 Phase 6: Challenge & Reflection Workspace
+- **Challenge Discovery**: [`/challenges`](http://localhost:3000/challenges) — Multi-parameter challenge library with personalized recommendations, capability/difficulty filtering, search, and bookmarks.
+- **Challenge Deep Dive**: [`/challenges/[challengeId]`](http://localhost:3000/challenges/the-unproven-claim) — Full scenario context, learning objectives, deliverable specifications, thinking steps, and mental models.
+- **Execution Workspace**: [`/workspace/[attemptId]`](http://localhost:3000/workspace/demo-attempt-1) — Dual-pane challenge workspace with debounced autosave, structured deliverable inputs, scratchpad, integrated AI Growth Coach drawer, and submission preview modal.
+- **Rubric Evaluation Feedback**: [`/workspace/[attemptId]/evaluation`](http://localhost:3000/workspace/demo-attempt-completed/evaluation) — Grounded 4-level rubric evaluation breakdown with evidence citations, observable strengths, growth opportunities, and alternative perspectives.
+- **Metacognitive Reflection**: [`/workspace/[attemptId]/reflection`](http://localhost:3000/workspace/demo-attempt-completed/reflection) — Capability-tailored reflection workspace with persistent responses, AI usage inquiry, and completion lifecycle progression.
+- **My Work Workspace**: [`/my-work`](http://localhost:3000/my-work) — Centralized practice overview tracking drafts, submissions, evaluations, reflections, and bookmarked challenges.
+
+### 4.7 Diagnostic & API Routes
 - **System Health**: [`/api/health`](http://localhost:3000/api/health) — Diagnostic status of services.
 - **AI Connectivity**: [`/api/ai/test`](http://localhost:3000/api/ai/test) — AI adapter test route.
 
@@ -128,6 +137,12 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## 6. Documentation Index
 
+- [Challenge System Architecture](file:///Users/kazi/Projects/OBHASH/docs/CHALLENGE_SYSTEM_ARCHITECTURE.md)
+- [Challenge Framework Specification](file:///Users/kazi/Projects/OBHASH/docs/CHALLENGE_FRAMEWORK.md)
+- [Challenge Evaluation Framework](file:///Users/kazi/Projects/OBHASH/docs/CHALLENGE_EVALUATION_FRAMEWORK.md)
+- [Reflection Framework](file:///Users/kazi/Projects/OBHASH/docs/REFLECTION_FRAMEWORK.md)
+- [Challenge Database Schema](file:///Users/kazi/Projects/OBHASH/docs/CHALLENGE_DATABASE.md)
+- [AI Assistance Integration Guide](file:///Users/kazi/Projects/OBHASH/docs/AI_ASSISTANCE_INTEGRATION.md)
 - [AI Growth Coach Architecture](file:///Users/kazi/Projects/OBHASH/docs/AI_GROWTH_COACH_ARCHITECTURE.md)
 - [Coaching Framework Specification](file:///Users/kazi/Projects/OBHASH/docs/COACHING_FRAMEWORK.md)
 - [Socratic Coaching Prompts](file:///Users/kazi/Projects/OBHASH/docs/COACHING_PROMPTS.md)

@@ -800,6 +800,354 @@ export interface Database {
         };
         Relationships: [];
       };
+      challenges: {
+        Row: {
+          id: string;
+          title: string;
+          slug: string;
+          short_description: string;
+          detailed_instructions: string;
+          capability_category: string;
+          relevant_dimensions: string[];
+          difficulty: string;
+          estimated_completion_time: string;
+          learning_objective: string;
+          scenario: string;
+          required_deliverables: Json;
+          suggested_thinking_steps: string[];
+          optional_resources: Json;
+          reflection_prompts: string[];
+          version: number;
+          is_published: boolean;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id: string;
+          title: string;
+          slug: string;
+          short_description: string;
+          detailed_instructions: string;
+          capability_category: string;
+          relevant_dimensions?: string[];
+          difficulty: string;
+          estimated_completion_time: string;
+          learning_objective: string;
+          scenario: string;
+          required_deliverables?: Json;
+          suggested_thinking_steps?: string[];
+          optional_resources?: Json;
+          reflection_prompts?: string[];
+          version?: number;
+          is_published?: boolean;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          title?: string;
+          slug?: string;
+          short_description?: string;
+          detailed_instructions?: string;
+          capability_category?: string;
+          relevant_dimensions?: string[];
+          difficulty?: string;
+          estimated_completion_time?: string;
+          learning_objective?: string;
+          scenario?: string;
+          required_deliverables?: Json;
+          suggested_thinking_steps?: string[];
+          optional_resources?: Json;
+          reflection_prompts?: string[];
+          version?: number;
+          is_published?: boolean;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      challenge_versions: {
+        Row: {
+          id: string;
+          challenge_id: string;
+          version: number;
+          snapshot: Json;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          challenge_id: string;
+          version: number;
+          snapshot: Json;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          challenge_id?: string;
+          version?: number;
+          snapshot?: Json;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
+      challenge_attempts: {
+        Row: {
+          id: string;
+          user_id: string;
+          challenge_id: string;
+          challenge_version: number;
+          status: string;
+          journey_activity_id: string | null;
+          started_at: string;
+          submitted_at: string | null;
+          completed_at: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id: string;
+          user_id: string;
+          challenge_id: string;
+          challenge_version?: number;
+          status?: string;
+          journey_activity_id?: string | null;
+          started_at?: string;
+          submitted_at?: string | null;
+          completed_at?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          challenge_id?: string;
+          challenge_version?: number;
+          status?: string;
+          journey_activity_id?: string | null;
+          started_at?: string;
+          submitted_at?: string | null;
+          completed_at?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      challenge_drafts: {
+        Row: {
+          id: string;
+          attempt_id: string;
+          user_id: string;
+          notes: string;
+          deliverables: Json;
+          last_saved_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          attempt_id: string;
+          user_id: string;
+          notes?: string;
+          deliverables?: Json;
+          last_saved_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          attempt_id?: string;
+          user_id?: string;
+          notes?: string;
+          deliverables?: Json;
+          last_saved_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      challenge_submissions: {
+        Row: {
+          id: string;
+          attempt_id: string;
+          user_id: string;
+          challenge_id: string;
+          challenge_version: number;
+          notes_snapshot: string;
+          deliverables_snapshot: Json;
+          submission_number: number;
+          submitted_at: string;
+        };
+        Insert: {
+          id?: string;
+          attempt_id: string;
+          user_id: string;
+          challenge_id: string;
+          challenge_version?: number;
+          notes_snapshot?: string;
+          deliverables_snapshot?: Json;
+          submission_number?: number;
+          submitted_at?: string;
+        };
+        Update: {
+          id?: string;
+          attempt_id?: string;
+          user_id?: string;
+          challenge_id?: string;
+          challenge_version?: number;
+          notes_snapshot?: string;
+          deliverables_snapshot?: Json;
+          submission_number?: number;
+          submitted_at?: string;
+        };
+        Relationships: [];
+      };
+      challenge_evaluations: {
+        Row: {
+          id: string;
+          submission_id: string;
+          attempt_id: string;
+          user_id: string;
+          evaluator_type: string;
+          evaluator_version: string;
+          strengths: Json;
+          growth_opportunities: Json;
+          evidence_citations: Json;
+          alternative_perspectives: Json;
+          recommended_next_steps: Json;
+          dimension_evaluations: Json;
+          confidence_score: number;
+          evidence_sufficiency: string;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          submission_id: string;
+          attempt_id: string;
+          user_id: string;
+          evaluator_type?: string;
+          evaluator_version?: string;
+          strengths?: Json;
+          growth_opportunities?: Json;
+          evidence_citations?: Json;
+          alternative_perspectives?: Json;
+          recommended_next_steps?: Json;
+          dimension_evaluations?: Json;
+          confidence_score?: number;
+          evidence_sufficiency?: string;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          submission_id?: string;
+          attempt_id?: string;
+          user_id?: string;
+          evaluator_type?: string;
+          evaluator_version?: string;
+          strengths?: Json;
+          growth_opportunities?: Json;
+          evidence_citations?: Json;
+          alternative_perspectives?: Json;
+          recommended_next_steps?: Json;
+          dimension_evaluations?: Json;
+          confidence_score?: number;
+          evidence_sufficiency?: string;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
+      challenge_reflections: {
+        Row: {
+          id: string;
+          attempt_id: string;
+          user_id: string;
+          challenge_id: string;
+          responses: Json;
+          is_submitted: boolean;
+          submitted_at: string;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          attempt_id: string;
+          user_id: string;
+          challenge_id: string;
+          responses?: Json;
+          is_submitted?: boolean;
+          submitted_at?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          attempt_id?: string;
+          user_id?: string;
+          challenge_id?: string;
+          responses?: Json;
+          is_submitted?: boolean;
+          submitted_at?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      challenge_bookmarks: {
+        Row: {
+          id: string;
+          user_id: string;
+          challenge_id: string;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          challenge_id: string;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          challenge_id?: string;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
+      challenge_ai_assistance_records: {
+        Row: {
+          id: string;
+          attempt_id: string;
+          user_id: string;
+          coaching_session_id: string | null;
+          queries_count: number;
+          hint_levels_used: number[];
+          action_types_used: string[];
+          assistance_summary: string;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          attempt_id: string;
+          user_id: string;
+          coaching_session_id?: string | null;
+          queries_count?: number;
+          hint_levels_used?: number[];
+          action_types_used?: string[];
+          assistance_summary?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          attempt_id?: string;
+          user_id?: string;
+          coaching_session_id?: string | null;
+          queries_count?: number;
+          hint_levels_used?: number[];
+          action_types_used?: string[];
+          assistance_summary?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
     };
     Views: {
       [_ in never]: never;

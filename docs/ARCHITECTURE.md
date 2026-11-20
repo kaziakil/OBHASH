@@ -1,6 +1,6 @@
 # OBHASH Architecture Guide
 
-**Phase:** 5 of 8 (AI Growth Coach)  
+**Phase:** 6 of 8 (Challenge & Reflection Workspace)  
 **Document Status:** Complete & Active
 
 ---
@@ -173,6 +173,15 @@ The AI Growth Coach is built upon the **Human-Centered Intelligence** paradigm (
 - **Prompt Injection Isolation**: User-provided context and responses are demarcated in untrusted boundary envelopes (`<learner_context>`) to neutralize prompt injection vectors.
 - **Deterministic Socratic Fallback**: Full rule-based dialogue fallback ensuring continuity if the AI provider experiences outages or rate limits.
 
+### 6.2 Challenge & Reflection Workspace Architecture (Phase 6)
+
+The Challenge & Reflection Workspace turns personalized development roadmaps into active, independent practice:
+- **Challenge Discovery & Recommendation**: Recommendation scoring grounded in Phase 3 baseline opportunities, Phase 4 focus areas and goals, and user interests.
+- **Continuous Autosave Engine**: 1500ms debounced server synchronization of notes and deliverables with real-time status reporting.
+- **Contextual AI Coach Drawer**: In-workspace Socratic assistance with prompt isolation; AI guidance is kept in assistance logs and never ghostwritten into user deliverables.
+- **Grounded Rubric Evaluation**: Server-side evaluation extracting direct quotes from submitted deliverables, evaluating relevant capability dimensions, and assigning 4-level rubric indicators.
+- **Metacognitive Reflection**: Capability-adapted reflection prompts consolidating learning into immutable developmental records.
+
 ---
 
 ## 7. Security Architecture
@@ -192,6 +201,6 @@ The AI Growth Coach is built upon the **Human-Centered Intelligence** paradigm (
 | **Phase 3: Capability Assessments** | Baseline scoring across the 3 capabilities | Uses `src/lib/ai/service.ts` for rubric evaluations | **Completed** |
 | **Phase 4: Growth Journeys** | 7-stage user development roadmap | Uses Supabase for journeys, tasks, and state management | **Completed** |
 | **Phase 5: AI Growth Coach** | Socratic coaching dialogues, guided reflection | Leverages `AIService` with specialized prompt templates | **Completed** |
-| **Phase 6: Practical Challenges** | Creative problem-solving simulations | Interactive client components backed by AI evaluator | *Pending Owner Approval* |
-| **Phase 7: Measurement & Portfolio** | Independence scoring, capability metrics | Analyzes user session telemetry and audit logs | *Planned* |
+| **Phase 6: Practical Challenges** | Creative problem-solving simulations & reflection | Interactive workspace, evaluation, reflection, and My Work | **Completed** |
+| **Phase 7: Measurement & Portfolio** | Independence scoring, capability metrics | Analyzes user session telemetry and audit logs | *Pending Owner Approval* |
 | **Phase 8: Polish & Launch Readiness** | Production hardening, performance audits | Leverages baseline logging and health checks | *Planned* |

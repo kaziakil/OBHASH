@@ -121,6 +121,20 @@ export function DashboardClientView({
               <span>🌱</span>
               <span>Growth Coach</span>
             </Link>
+            <Link
+              href="/challenges"
+              className="px-3.5 py-1.5 rounded-lg text-indigo-700 dark:text-indigo-400 font-semibold hover:bg-indigo-50 dark:hover:bg-indigo-950/40 transition-colors flex items-center gap-1.5"
+            >
+              <span>🎯</span>
+              <span>Challenges</span>
+            </Link>
+            <Link
+              href="/my-work"
+              className="px-3.5 py-1.5 rounded-lg text-zinc-600 dark:text-zinc-400 font-semibold hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors flex items-center gap-1.5"
+            >
+              <span>📁</span>
+              <span>My Work</span>
+            </Link>
             <button
               onClick={() => setActiveTab("profile")}
               className={`px-3.5 py-1.5 rounded-lg transition-colors cursor-pointer ${
@@ -370,6 +384,38 @@ export function DashboardClientView({
               >
                 Open Growth Coach →
               </Link>
+            </div>
+
+            {/* Phase 6: Challenge Practice Workspace Banner */}
+            <div className="rounded-2xl border border-indigo-200 dark:border-indigo-800/80 bg-gradient-to-r from-indigo-50/80 via-purple-50/40 to-white dark:from-indigo-950/40 dark:via-purple-950/20 dark:to-zinc-900 p-6 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="space-y-1.5">
+                <div className="flex items-center space-x-2">
+                  <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-indigo-100 text-indigo-800 dark:bg-indigo-950 dark:text-indigo-300">
+                    Phase 6 Active
+                  </span>
+                  <span className="text-xs font-mono text-zinc-500">Practice & Reflection Workspace</span>
+                </div>
+                <h3 className="text-lg font-bold text-zinc-900 dark:text-zinc-100">
+                  Tackle Capability Challenges & Build Evidence
+                </h3>
+                <p className="text-xs text-zinc-600 dark:text-zinc-400 max-w-xl leading-relaxed">
+                  Engage with authentic real-world problem scenarios across Critical Thinking, Creative Problem-Solving, and Curiosity. Record your reasoning, submit for grounded rubric evaluation, and reflect.
+                </p>
+              </div>
+              <div className="flex items-center gap-2 self-start sm:self-center">
+                <Link
+                  href="/my-work"
+                  className="px-4 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 font-medium text-xs hover:bg-zinc-100 dark:hover:bg-zinc-800 transition"
+                >
+                  My Work
+                </Link>
+                <Link
+                  href="/challenges"
+                  className="px-5 py-2.5 rounded-xl bg-indigo-600 text-white font-semibold text-xs hover:bg-indigo-500 transition shadow-sm whitespace-nowrap"
+                >
+                  Explore Challenges →
+                </Link>
+              </div>
             </div>
 
             {/* Seven-Stage Journey Preview */}

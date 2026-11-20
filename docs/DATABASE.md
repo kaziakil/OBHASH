@@ -1,6 +1,6 @@
 # OBHASH Database & Schema Reference
 
-**Phase:** 5 of 8  
+**Phase:** 6 of 8  
 **Storage Engine:** Supabase PostgreSQL  
 **Access Model:** Row Level Security (RLS)  
 
@@ -152,3 +152,15 @@ CREATE TRIGGER on_auth_user_created
    - Created `coaching_session_context_snapshots` (learner baseline and goal state captured at session start).
    - Enforced Row Level Security (RLS) on all coaching entities (`auth.uid() = user_id`).
    - Detailed schema reference documented in [Coaching Database Schema](file:///Users/kazi/Projects/OBHASH/docs/COACHING_DATABASE.md).
+6. `20261120050000_phase6_challenges.sql` (Phase 6):
+   - Created `challenges` (master challenge library across 3 capabilities and 3 difficulty tiers).
+   - Created `challenge_versions` (immutable challenge content version snapshots).
+   - Created `challenge_attempts` (user practice sessions and lifecycle states).
+   - Created `challenge_drafts` (continuous autosave state for notes and deliverables).
+   - Created `challenge_submissions` (immutable snapshot of submitted work).
+   - Created `challenge_evaluations` (evidence-grounded rubric evaluations, citations, and guidance).
+   - Created `challenge_reflections` (metacognitive reflection records).
+   - Created `challenge_bookmarks` (user saved challenges).
+   - Created `challenge_ai_assistance_records` (auditable logs of AI consultations, hint levels, and action types).
+   - Enforced Row Level Security (RLS) on all user data (`auth.uid() = user_id`).
+   - Detailed schema reference documented in [Challenge Database Schema](file:///Users/kazi/Projects/OBHASH/docs/CHALLENGE_DATABASE.md).

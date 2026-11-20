@@ -122,6 +122,13 @@ export function GoalDetailsClient({
 
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2">
               <Link
+                href={`/challenges?capability=${goal.capabilityKey}`}
+                className="px-3 py-1.5 rounded-xl bg-indigo-600 text-white text-xs font-semibold hover:bg-indigo-500 transition flex items-center space-x-1.5 shadow-2xs whitespace-nowrap"
+              >
+                <span>🎯</span>
+                <span>Practice Challenges →</span>
+              </Link>
+              <Link
                 href={`/coach?capabilityKey=${goal.capabilityKey}&journeyId=${journeyId}&goalId=${goal.id}`}
                 className="px-3 py-1.5 rounded-xl bg-emerald-800 text-white text-xs font-semibold hover:bg-emerald-900 transition flex items-center space-x-1.5 shadow-2xs whitespace-nowrap"
               >
