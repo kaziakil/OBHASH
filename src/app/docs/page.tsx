@@ -46,6 +46,7 @@ export default function DocsPage() {
     setAccessResult({
       isAccessible: true,
       isAdmin: true,
+      isSuperAdmin: true,
       reason: "authorized",
       config,
     });

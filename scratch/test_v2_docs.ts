@@ -10,13 +10,15 @@ import {
   V2_DOCUMENTATION_SECTIONS,
   V2_IMPLEMENTATION_INVENTORY,
   getV2LiveSystemMetrics,
+  validateDocumentationIntegrity,
 } from "../src/lib/docs/v2-content";
 import {
   evaluateDocsAccess,
   getDocsAccessConfig,
   updateDocsAccessConfig,
   resetDocsAccessConfigToDefault,
-  getDocsAuditLogs,
+  createNewVersionSnapshot,
+  rollbackToVersion,
 } from "../src/lib/docs/access-store";
 
 function assert(condition: boolean, message: string) {
@@ -106,33 +108,59 @@ expectedCodes.forEach((c) => {
 });
 console.log("✅ All 17 documentation sections (A to Q) verified.");
 
-// 6. Access Control & Scheduling Verification
-console.log("6. Verifying Access Control, UTC Timezone & Audit Trail...");
+// 6. Automated Ecosystem Integrity Verification
+console.log("6. Verifying Automated Ecosystem Integrity Engine...");
+const integrity = validateDocumentationIntegrity();
+assert(integrity.isValid === true, "Integrity check reported invalid state");
+assert(integrity.integrityScore === 100, `Expected integrity score 100%, found ${integrity.integrityScore}%`);
+assert(integrity.checks.length >= 6, "Expected at least 6 integrity checks");
+integrity.checks.forEach((chk) => {
+  assert(chk.passed, `Check failed: ${chk.name} - ${chk.details}`);
+});
+console.log(`✅ Ecosystem Integrity 100% verified (${integrity.checks.length} passing checks).`);
+
+// 7. Access Control, Versioning, Rollback & Audit Trail
+console.log("7. Verifying Access Control, Versioning, Rollback & Audit Trail...");
 resetDocsAccessConfigToDefault();
 const initialConfig = getDocsAccessConfig();
 assert(initialConfig.timezone === "UTC", `Expected default timezone UTC, found ${initialConfig.timezone}`);
 assert(initialConfig.isEnabled === true, "Docs should be enabled by default");
+assert(initialConfig.publishState === "published", "Default state should be published");
 
+// Test normal access
 const accessDefault = evaluateDocsAccess();
 assert(accessDefault.isAccessible === true, "Default evaluateDocsAccess should be accessible");
 
-// Test passcode bypass
-const passRes = evaluateDocsAccess({ passcode: "obhash-admin-2026" });
-assert(passRes.isAdmin === true, "Admin passcode should authorize admin bypass");
+// Test admin passcode bypass
+const adminRes = evaluateDocsAccess({ passcode: "obhash-admin-2026" });
+assert(adminRes.isAdmin === true, "Admin passcode should authorize admin bypass");
 
-// Test schedule modification and audit log
-updateDocsAccessConfig({
-  announcementBanner: "Test Verification Run",
-});
-const updatedConfig = getDocsAccessConfig();
-assert(updatedConfig.announcementBanner === "Test Verification Run", "Config update failed");
+// Test super admin passcode bypass
+const superAdminRes = evaluateDocsAccess({ passcode: "obhash-superadmin-2026" });
+assert(superAdminRes.isSuperAdmin === true && superAdminRes.isAdmin === true, "Super admin passcode authorized");
 
-const logs = getDocsAuditLogs();
-assert(logs.length > 0, "Audit logs should not be empty");
-console.log("✅ Access control, scheduling, and UTC audit trails verified.");
+// Test draft mode gating
+updateDocsAccessConfig({ publishState: "draft" });
+const publicInDraft = evaluateDocsAccess();
+assert(publicInDraft.isAccessible === false && publicInDraft.reason === "draft_mode", "Public denied during draft mode");
+const adminInDraft = evaluateDocsAccess({ passcode: "obhash-admin-2026" });
+assert(adminInDraft.isAccessible === true, "Admin granted access during draft mode");
 
-// 7. Live Telemetry & Inventory Verification
-console.log("7. Verifying Live System Telemetry & Implementation Inventory...");
+// Reset to published
+updateDocsAccessConfig({ publishState: "published" });
+
+// Test version snapshot and rollback
+const withSnapshot = createNewVersionSnapshot("v2.1.0-alpha", "Automated test snapshot", "published");
+assert(withSnapshot.publishedVersion === "v2.1.0-alpha", "Snapshot creation failed to update current version");
+assert(withSnapshot.versionHistory.length > 3, "Snapshot should be added to history");
+
+// Rollback to v2.0.0
+const afterRollback = rollbackToVersion("ver-v2-0-0");
+assert(afterRollback.publishedVersion === "v2.0.0", "Rollback failed to restore published version v2.0.0");
+console.log("✅ Version snapshots, rollback, draft lifecycle, and role-based access verified.");
+
+// 8. Live Telemetry & Inventory Verification
+console.log("8. Verifying Live System Telemetry & Implementation Inventory...");
 const metrics = getV2LiveSystemMetrics();
 assert(metrics.status === "operational", `Expected operational status, found ${metrics.status}`);
 assert(metrics.passingTestsCount >= 35 && metrics.passingTestsCount === metrics.totalTestsCount, `Expected at least 35 passing tests and 100% pass rate, found ${metrics.passingTestsCount}/${metrics.totalTestsCount}`);

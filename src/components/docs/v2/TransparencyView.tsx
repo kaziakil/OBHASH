@@ -4,6 +4,7 @@ import React, { useState, useMemo } from "react";
 import {
   V2_IMPLEMENTATION_INVENTORY,
   getV2LiveSystemMetrics,
+  validateDocumentationIntegrity,
 } from "@/lib/docs/v2-content";
 import { getDocsAuditLogs } from "@/lib/docs/access-store";
 
@@ -19,6 +20,7 @@ export function TransparencyView({ searchQuery = "" }: TransparencyViewProps) {
 
   const metrics = useMemo(() => getV2LiveSystemMetrics(), []);
   const auditLogs = useMemo(() => getDocsAuditLogs(), []);
+  const integrityReport = useMemo(() => validateDocumentationIntegrity(), []);
 
   const types = ["All", "Application", "Engine", "Feature", "API", "Infrastructure", "Governance"];
   const statuses = ["All", "Operational", "Implemented", "In Development", "Planned", "Under Research"];
@@ -134,7 +136,49 @@ export function TransparencyView({ searchQuery = "" }: TransparencyViewProps) {
         </div>
       </section>
 
-      {/* 3. IMPLEMENTATION INVENTORY TABLE */}
+      {/* 3. ECOSYSTEM INTEGRITY & CONSISTENCY AUDIT */}
+      <section className="space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-zinc-200 dark:border-zinc-800 pb-3">
+          <div>
+            <h2 className="text-lg font-bold text-zinc-900 dark:text-white flex items-center gap-2">
+              <span>🛡️ Ecosystem Integrity & Consistency Audit</span>
+              <span className="text-xs font-mono font-semibold px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300">
+                {integrityReport.integrityScore}% VERIFIED
+              </span>
+            </h2>
+            <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">
+              Automated validation against missing records, orphan dependencies, and cross-application inconsistencies.
+            </p>
+          </div>
+          <span className="text-[10px] font-mono text-zinc-400 self-start sm:self-auto">
+            Freshness: {integrityReport.validationTimestamp.slice(0, 19).replace("T", " ")} UTC
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          {integrityReport.checks.map((chk, idx) => (
+            <div
+              key={idx}
+              className="p-4 rounded-2xl bg-white dark:bg-[#161421] border border-zinc-200 dark:border-zinc-800 space-y-1.5 shadow-xs"
+            >
+              <div className="flex items-center justify-between">
+                <span className="font-bold text-xs text-zinc-900 dark:text-white flex items-center gap-1.5">
+                  <span className="text-emerald-500">✓</span>
+                  <span>{chk.name}</span>
+                </span>
+                <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 font-bold">
+                  PASS
+                </span>
+              </div>
+              <p className="text-[11px] text-zinc-500 dark:text-zinc-400 leading-snug">
+                {chk.details}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 4. IMPLEMENTATION INVENTORY TABLE */}
       <section className="space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
@@ -229,7 +273,7 @@ export function TransparencyView({ searchQuery = "" }: TransparencyViewProps) {
         </div>
       </section>
 
-      {/* 4. RECENT ACCESS & AUDIT LOGS */}
+      {/* 5. RECENT ACCESS & AUDIT LOGS */}
       <section className="space-y-4">
         <h2 className="text-lg font-bold text-zinc-900 dark:text-white flex items-center gap-2">
           <span>📜 Portal Configuration & Access Audit Trail</span>

@@ -6,7 +6,7 @@ import type { DocsAccessConfig } from "@/types/docs";
 
 interface DocsRestrictedViewProps {
   config: DocsAccessConfig;
-  reason?: "disabled_by_admin" | "before_window" | "after_window" | "invalid_config" | "authorized";
+  reason?: "disabled_by_admin" | "draft_mode" | "before_window" | "after_window" | "invalid_config" | "authorized";
   onAuthorizeAdmin: (passcode: string) => void;
   onInstantBypass: () => void;
 }
@@ -66,6 +66,8 @@ export function DocsRestrictedView({
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-amber-500/10 text-amber-700 dark:text-amber-300 border border-amber-500/20">
             {reason === "disabled_by_admin"
               ? "Access Manually Restricted"
+              : reason === "draft_mode"
+              ? "Draft Mode (Admin Authentication Required)"
               : reason === "after_window"
               ? "Evaluation Window Concluded"
               : "Scheduled Judging Window"}

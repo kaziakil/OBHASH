@@ -59,17 +59,46 @@ export interface TechnicalDocSection {
   }[];
 }
 
+export interface DocsVersionRecord {
+  versionId: string;
+  versionName: string;
+  releaseDate: string;
+  publishState: "published" | "draft" | "archived";
+  author: string;
+  notes: string;
+  isCurrent: boolean;
+}
+
 export interface DocsAccessConfig {
   isEnabled: boolean; // Master enable/disable toggle
+  publishState: "published" | "draft" | "archived"; // Publishing lifecycle state
   isScheduled: boolean; // True if time-gated by window
   scheduleStart: string; // ISO timestamp
   scheduleEnd: string; // ISO timestamp
   timezone: string; // Explicit timezone (e.g. "UTC")
   allowAdminBypass: boolean;
   adminBypassPasscode: string;
+  superAdminPasscode: string;
   publishedVersion: string;
+  versionHistory: DocsVersionRecord[];
   lastUpdated: string;
   announcementBanner?: string;
+}
+
+export interface DocumentationIntegrityReport {
+  isValid: boolean;
+  totalApplications: number;
+  totalSharedEngines: number;
+  totalRoadmapStages: number;
+  totalRoadmapPhases: number;
+  totalDocumentationSections: number;
+  integrityScore: number;
+  checks: {
+    name: string;
+    passed: boolean;
+    details: string;
+  }[];
+  validationTimestamp: string;
 }
 
 export interface LiveSystemMetrics {
