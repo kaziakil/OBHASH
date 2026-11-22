@@ -6,7 +6,7 @@ import type { DocsAccessConfig } from "@/types/docs";
 
 interface DocsRestrictedViewProps {
   config: DocsAccessConfig;
-  reason?: "disabled_by_admin" | "before_window" | "after_window" | "authorized";
+  reason?: "disabled_by_admin" | "before_window" | "after_window" | "invalid_config" | "authorized";
   onAuthorizeAdmin: (passcode: string) => void;
   onInstantBypass: () => void;
 }

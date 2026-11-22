@@ -17,7 +17,7 @@ export function TechnicalDocView({ searchQuery }: TechnicalDocViewProps) {
     return (
       sec.title.toLowerCase().includes(q) ||
       sec.summary.toLowerCase().includes(q) ||
-      sec.body.some((b) => b.toLowerCase().includes(q))
+      sec.body.some((b: string) => b.toLowerCase().includes(q))
     );
   });
 
@@ -89,7 +89,7 @@ export function TechnicalDocView({ searchQuery }: TechnicalDocViewProps) {
 
             {/* Section Detailed Paragraphs */}
             <div className="space-y-3 text-xs sm:text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
-              {sec.body.map((p, i) => (
+              {sec.body.map((p: string, i: number) => (
                 <div key={i} className="flex items-start gap-2.5">
                   <span className="text-[#5B3BFF] font-bold shrink-0 mt-0.5">›</span>
                   <p>{p}</p>

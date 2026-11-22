@@ -19,7 +19,8 @@ export function PitchDeckView({ searchQuery }: PitchDeckViewProps) {
       slide.tagline.toLowerCase().includes(q) ||
       slide.content.lead.toLowerCase().includes(q) ||
       slide.content.points.some(
-        (p) => p.headline.toLowerCase().includes(q) || p.description.toLowerCase().includes(q)
+        (p: { headline: string; description: string }) =>
+          p.headline.toLowerCase().includes(q) || p.description.toLowerCase().includes(q)
       )
     );
   });
@@ -88,7 +89,7 @@ export function PitchDeckView({ searchQuery }: PitchDeckViewProps) {
 
         {/* Slide Key Value Points Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {activeSlide.content.points.map((pt, idx) => (
+          {activeSlide.content.points.map((pt: { headline: string; description: string; metric?: string }, idx: number) => (
             <div
               key={idx}
               className="p-5 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 bg-white dark:bg-[#111019] space-y-3 flex flex-col justify-between shadow-xs hover:border-[#5B3BFF]/40 transition-colors"
@@ -272,7 +273,7 @@ export function PitchDeckView({ searchQuery }: PitchDeckViewProps) {
                 {slide.content.lead}
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
-                {slide.content.points.map((pt, i) => (
+                {slide.content.points.map((pt: { headline: string; description: string; metric?: string }, i: number) => (
                   <div key={i} className="p-3 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200/60 dark:border-zinc-800 text-xs space-y-1">
                     <span className="font-bold text-zinc-900 dark:text-zinc-100 block">{pt.headline}</span>
                     <p className="text-[11px] text-zinc-500 dark:text-zinc-400">{pt.description}</p>
