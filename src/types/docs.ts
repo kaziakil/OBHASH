@@ -11,8 +11,109 @@ export type ImplementationStatus =
   | "Under Research"
   | "Deprecated";
 
-export type DocsExperienceView = "product" | "engineering" | "roadmap" | "transparency";
+export type DocsExperienceView =
+  | "product"
+  | "engineering"
+  | "roadmap"
+  | "transparency"
+  | "dependencies"
+  | "adrs";
 export type DocsTabMode = DocsExperienceView | "pitch" | "technical" | "live-system";
+
+export type DocVisibilityClassification = "Public" | "Restricted" | "Private";
+export type DocReviewStatus = "Approved" | "Under Review" | "Draft" | "Deprecated";
+
+export interface DocGovernanceMetadata {
+  owner: string;
+  reviewer: string;
+  reviewStatus: DocReviewStatus;
+  lastReviewedAt: string;
+  maintenancePolicy: string;
+  visibilityClassification: DocVisibilityClassification;
+}
+
+export interface ADRRecord {
+  id: string;
+  number: number;
+  title: string;
+  status: "Proposed" | "Approved" | "Superseded" | "Deprecated";
+  date: string;
+  author: string;
+  approvers: string[];
+  context: string;
+  decision: string;
+  alternativesConsidered: {
+    title: string;
+    description: string;
+    rejectionReason: string;
+  }[];
+  consequences: {
+    positive: string[];
+    negative: string[];
+    neutral?: string[];
+  };
+  relatedEngines: string[];
+  relatedPhases: string[];
+  approvalHistory: {
+    date: string;
+    event: string;
+    actor: string;
+  }[];
+}
+
+export type DependencyCategory =
+  | "Application"
+  | "Engine"
+  | "Component"
+  | "API"
+  | "DataEntity"
+  | "WorkPackage";
+
+export interface DependencyNode {
+  id: string;
+  name: string;
+  code: string;
+  category: DependencyCategory;
+  description: string;
+  owner: string;
+  status: ImplementationStatus;
+}
+
+export interface DependencyEdge {
+  sourceId: string;
+  targetId: string;
+  relationship: string;
+  isVerified: boolean;
+}
+
+export interface DocQAReport {
+  score: number;
+  totalLinksChecked: number;
+  brokenLinksCount: number;
+  totalReferencesChecked: number;
+  missingReferencesCount: number;
+  terminologyConsistencyScore: number;
+  governanceCompleteness: number;
+  isPassing: boolean;
+  auditedAt: string;
+  checks: {
+    rule: string;
+    passed: boolean;
+    details: string;
+  }[];
+}
+
+export interface PrivacyAwareAnalytics {
+  totalPageViews: number;
+  sectionEngagement: Record<string, number>;
+  topSearchTerms: { term: string; count: number }[];
+  feedbackSummary: {
+    helpfulVotes: number;
+    unhelpfulVotes: number;
+    satisfactionRate: number;
+  };
+  lastAggregatedAt: string;
+}
 
 export interface TeamMember {
   id: string;
@@ -220,6 +321,7 @@ export interface DocumentationSection {
     badges?: string[];
   }[];
   diagramId?: string;
+  governance?: DocGovernanceMetadata;
 }
 
 export interface ImplementationInventoryItem {

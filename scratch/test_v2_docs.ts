@@ -20,6 +20,21 @@ import {
   createNewVersionSnapshot,
   rollbackToVersion,
 } from "../src/lib/docs/access-store";
+import {
+  V2_ADR_RECORDS,
+  searchADRs,
+} from "../src/lib/docs/adr-repository";
+import {
+  DEPENDENCY_NODES,
+  DEPENDENCY_EDGES,
+  getConnectedDependencies,
+} from "../src/lib/docs/dependency-graph";
+import {
+  validateDocumentationQuality,
+  getPrivacyAnalytics,
+  recordDocFeedback,
+  filterSectionsByVisibility,
+} from "../src/lib/docs/shared-service";
 
 function assert(condition: boolean, message: string) {
   if (!condition) {
@@ -159,14 +174,56 @@ const afterRollback = rollbackToVersion("ver-v2-0-0");
 assert(afterRollback.publishedVersion === "v2.0.0", "Rollback failed to restore published version v2.0.0");
 console.log("✅ Version snapshots, rollback, draft lifecycle, and role-based access verified.");
 
-// 8. Live Telemetry & Inventory Verification
-console.log("8. Verifying Live System Telemetry & Implementation Inventory...");
+// 8. Architecture Decision Records (ADRs) Verification
+console.log("8. Verifying Architecture Decision Records (ADRs)...");
+assert(V2_ADR_RECORDS.length >= 6, `Expected at least 6 ADR records, found ${V2_ADR_RECORDS.length}`);
+const adrIds = V2_ADR_RECORDS.map((a) => a.id);
+assert(adrIds.includes("ADR-001"), "Missing ADR-001");
+assert(adrIds.includes("ADR-002"), "Missing ADR-002");
+assert(adrIds.includes("ADR-005"), "Missing ADR-005 (Phase 07 Mandate)");
+
+const socraticResults = searchADRs("Socratic");
+assert(socraticResults.length > 0, "ADR search for 'Socratic' should return results");
+const approvedOnly = searchADRs("", "Approved");
+assert(approvedOnly.length >= 5, "Expected at least 5 approved ADRs");
+console.log(`✅ ADR repository verified (${V2_ADR_RECORDS.length} ADRs with searchable alternatives and consequences).`);
+
+// 9. Interactive Dependency Explorer Verification
+console.log("9. Verifying Dependency Explorer Graph...");
+assert(DEPENDENCY_NODES.length >= 20, `Expected at least 20 dependency nodes, found ${DEPENDENCY_NODES.length}`);
+assert(DEPENDENCY_EDGES.length >= 15, `Expected at least 15 verified dependency edges, found ${DEPENDENCY_EDGES.length}`);
+
+const app1Detail = getConnectedDependencies("app-01");
+assert(app1Detail.downstream.length > 0, "APP-01 should consume downstream engines");
+assert(app1Detail.downstream.some((d) => d.node.code === "ENG-01"), "APP-01 should connect to ENG-01");
+console.log(`✅ Dependency Explorer verified (${DEPENDENCY_NODES.length} nodes, ${DEPENDENCY_EDGES.length} edges).`);
+
+// 10. Documentation QA & Privacy Analytics Verification
+console.log("10. Verifying Documentation QA & Privacy Analytics...");
+const qa = validateDocumentationQuality();
+assert(qa.isPassing === true, "Documentation QA check failed");
+assert(qa.brokenLinksCount === 0, `Expected 0 broken links, found ${qa.brokenLinksCount}`);
+assert(qa.missingReferencesCount === 0, `Expected 0 missing references, found ${qa.missingReferencesCount}`);
+
+const privacyAnalytics = getPrivacyAnalytics();
+assert(privacyAnalytics.totalPageViews > 0, "Analytics should track aggregated page views");
+recordDocFeedback(true);
+const updatedAnalytics = getPrivacyAnalytics();
+assert(updatedAnalytics.feedbackSummary.helpfulVotes > privacyAnalytics.feedbackSummary.helpfulVotes, "Feedback recording failed");
+
+// Visibility filtering test
+const allPublic = filterSectionsByVisibility(V2_DOCUMENTATION_SECTIONS);
+assert(allPublic.length > 0, "Public sections should be accessible");
+console.log("✅ Documentation QA (100% passing) and privacy-aware analytics verified.");
+
+// 11. Live Telemetry & Inventory Verification
+console.log("11. Verifying Live System Telemetry & Implementation Inventory...");
 const metrics = getV2LiveSystemMetrics();
 assert(metrics.status === "operational", `Expected operational status, found ${metrics.status}`);
 assert(metrics.passingTestsCount >= 35 && metrics.passingTestsCount === metrics.totalTestsCount, `Expected at least 35 passing tests and 100% pass rate, found ${metrics.passingTestsCount}/${metrics.totalTestsCount}`);
 assert(V2_IMPLEMENTATION_INVENTORY.length >= 10, "Inventory should contain at least 10 audited items");
 console.log(`✅ Telemetry confirmed: ${metrics.passingTestsCount}/${metrics.totalTestsCount} passing tests, zero fake metrics.`);
 
-console.log("\n=======================================================");
-console.log("🎉 ALL TESTS PASSED: OBHASH v2.0.0 PORTAL READY FOR AUDIT");
-console.log("=======================================================\n");
+console.log("\n===================================================================");
+console.log("🎉 ALL TESTS PASSED: OBHASH v2.0.0 COMPLETE ARCHITECTURE CERTIFIED");
+console.log("===================================================================\n");

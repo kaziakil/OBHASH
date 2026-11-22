@@ -8,6 +8,8 @@ import { ProductView } from "@/components/docs/v2/ProductView";
 import { EngineeringView } from "@/components/docs/v2/EngineeringView";
 import { RoadmapView } from "@/components/docs/v2/RoadmapView";
 import { TransparencyView } from "@/components/docs/v2/TransparencyView";
+import { DependencyExplorerView } from "@/components/docs/v2/DependencyExplorerView";
+import { ADRRepositoryView } from "@/components/docs/v2/ADRRepositoryView";
 import {
   evaluateDocsAccess,
   getDocsAccessConfig,
@@ -228,7 +230,7 @@ export default function DocsPage() {
       />
 
       {/* Main Container */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-1">
+      <main id="main-content" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-1">
         {normalizedTab === "product" && (
           <ProductView
             searchQuery={searchQuery}
@@ -240,6 +242,12 @@ export default function DocsPage() {
         )}
         {normalizedTab === "roadmap" && (
           <RoadmapView searchQuery={searchQuery} />
+        )}
+        {normalizedTab === "dependencies" && (
+          <DependencyExplorerView searchQuery={searchQuery} />
+        )}
+        {normalizedTab === "adrs" && (
+          <ADRRepositoryView searchQuery={searchQuery} />
         )}
         {normalizedTab === "transparency" && (
           <TransparencyView searchQuery={searchQuery} />
